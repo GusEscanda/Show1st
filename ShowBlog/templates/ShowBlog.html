@@ -8,23 +8,23 @@
 
 {% for post in posts %}
 
-<section class="page-section clearfix">
+<section>
     <div class="container">
-        <div class="intro">
-            {% if post.postImage %}
-                <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{{post.postImage.url}}" alt="" style="width: 45%;">
-            {% else %}
-                <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="/media{% url 'BLG' %}default.png" alt="" style="width: 45%;">
-            {% endif %}
-            <div class="intro-text left-0 text-center bg-faded p-5 rounded">
-                <h2 class="section-heading mb-4" >
-                    <span class="section-heading-upper">{{post.postTitle}}</span>
-                </h2>
-                <p class="mb-3">{{post.postContent}}</p>
-                <div style="text-align: left; font-size: 0.8em;">
-                    <p>Author: {{post.postAuthor}}</p>
-                    <p>Date: {{post.postDate}}</p>
-                    <p>{% for tag in post.postTags.all %} {{tag.tagName}} &nbsp; {% endfor %}</p>
+        <div class="row">
+            <div class="col-sm-4">
+                {% if post.postImage %}
+                    <img src="{{post.postImage.url}}" alt="" style="width: 95%;">
+                {% else %}
+                    <img src="/media{% url 'BLG' %}default.png" alt="" style="width: 95%;">
+                {% endif %}
+            </div>
+            <div class="col-sm">
+                <h4> {{post.postTitle}} </h2>
+                <p>{{post.postContent}}</p>
+                <div>
+                    Author: {{post.postAuthor}}<br>
+                    Date: {{post.postDate}}<br>
+                    Tags: {% for tag in post.postTags.all %} {{tag.tagName}} &nbsp; {% endfor %}
                 </div>
             </div>
         </div>
@@ -34,7 +34,7 @@
 {% endfor %}
 
 <section>
-    <div style="width: 75%; margin: auto; text-align: center; color: white;">
+    <div style="width: 75%; margin: auto; text-align: center;">
 
         Tags: &nbsp; <a href="{% url 'BLG' %}{{menuOpt}}">All</a>
 
