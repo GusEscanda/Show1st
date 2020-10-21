@@ -1,0 +1,38 @@
+pongo aqui algunas ideas de lo que quiero hacer...
+
+- pagina web lo mas generica posible para mostrar articulos o servicios que venda una empresa
+- bien parametrizada en cuanto a la estetica, imagenes, nombres de las opciones del menu, etc.
+
+- posibles opciones del menu principal (cada una se tiene que poder elegir si la quiere el usuario o no):
+
+    - contactenos (form p/enviar mail + info de contacto + mapa ubicacion)
+    - quienes somos (verso institucional + fotos de instalaciones y caras sonrientes)
+    - mostrar articulos/servicios. Opcion a mostrar solo una categoria/rubro. Se tendria que poder configurar
+      que muestre todo o alguna(s) categoria(s) en especial directo desde el llamado, asi el usuario puede
+      elegir entre hacer opciones de menu especificas por rubro o solo una general. Igualmente dentro de la 
+      pagina se tendria que poder elegir mas categorias/subcategorias, siempre restringido a la que se filtro
+      desde el menu (si la hubo)
+    - Novedades. Un lugar donde la empresa pueda poner novedades, anuncios, etc. c/u acompañado de foto, 
+      titulo y texto ampliado. Ordenados por fecha y opcionalmente poder categorizarlos y filtrarlos por
+      fecha y/o categoria
+
+
+implementacion:
+
+    - Menues configurables (guardar el arbol de opciones en una tabla de la BD mas 
+      info de que ejecutar en cada caso)
+    - ShowInfo: pensado para usar en opcion tipo "quienes somos", muestra una pagina con una foto grande 
+                  en el fondo (opcional) y un texto largo supuerpuesto (ver como se puede cargar/almacenar
+                  y en que formato). Opcional una coleccion de fotos debajo del texto, cada una de las cuales
+                  puede ser un link a otra 'PaginaInfo' o quiza un link en general...
+    - ShowContact: form p/enviar mail + info de contacto + mapa ubicacion
+    - ShowItems: Muestra los items (articulos/servicios) a la venta (con precios? sin precios? listas segun
+                 tipo de cliente? categorias de clientes? pensar un poco esto...) cada item con su foto y 
+                 descripcion corta y larga, y su(s) rubro(s)/categoria(s) filtrar categorias directo desde el 
+                 menu y adicionalmente desde esta pantalla. Las categorias restringidas por menu que no se 
+                 puedan sacar, desde la pantalla solo se pueden AGREGAR filtros.
+    
+    - ShowBlog: este es muy parecido a ShowItems, en el sentido de mostrar una coleccion de fotos con textos
+            asociados y filtrados por categoria. Quiza se pueda generalizar y reusar algo de codigo...
+
+

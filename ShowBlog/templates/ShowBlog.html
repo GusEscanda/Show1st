@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %} {{optName}} {% endblock %}
+
+{% block content %}
+
+{% for post in posts %}
+
+<section class="page-section clearfix">
+    <div class="container">
+        <div class="intro">
+            {% if post.postImage %}
+                <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{{post.postImage.url}}" alt="" style="width: 45%;">
+            {% else %}
+                <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="/media{% url 'BLG' %}default.png" alt="" style="width: 45%;">
+            {% endif %}
+            <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+                <h2 class="section-heading mb-4" >
+                    <span class="section-heading-upper">{{post.postTitle}}</span>
+                </h2>
+                <p class="mb-3">{{post.postContent}}</p>
+                <div style="text-align: left; font-size: 0.8em;">
+                    <p>Author: {{post.postAuthor}}</p>
+                    <p>Date: {{post.postDate}}</p>
+                    <p>{% for tag in post.postTags.all %} {{tag.tagName}} &nbsp; {% endfor %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endfor %}
+
+<section>
+    <div style="width: 75%; margin: auto; text-align: center; color: white;">
+
+        Tags: &nbsp; <a href="{% url 'BLG' %}{{menuOpt}}">All</a>
+
+        {% for tag in tags %}
+            &nbsp;|&nbsp; <a href="{% url 'BLG' %}addFilter/{{menuOpt}}/{{tag}}">  {{ tag }} </a>
+        {% endfor %}
+
+    </div>
+</section>
+
+{% endblock %}
+

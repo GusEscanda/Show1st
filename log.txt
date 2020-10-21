@@ -1,0 +1,41 @@
+django-admin startproject Show1st
+python manage.py startapp mainApp
+python manage.py startapp ShowItems
+python manage.py startapp ShowBlog
+python manage.py startapp ShowInfo
+python manage.py startapp ShowContact
+
+- crear/llenar los 5 urls.py de las apps y el principal (6 en total)
+- hacer un view y un template/xxxx.html con un <h1>Nombre de la app</h1> para cada app
+
+- En settings.py agregar las 5 apps al final de la lista INSTALLED_APPS
+
+python manage.py runserver
+
+probar en un browser todas las urls/views/templates creadas
+
+- agregar al final de settings.py
+
+STATIC_URL = '/static/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+- trabajar un poco los templates para que hereden de una plantilla base
+- usar bootstrap para que todo sea responsive
+
+
+- comenzar a hacer el modelo de datos de de mainApp (mainApp/models.py)
+
+python manage.py makemigrations
+python manage.py migrate
+
+python manage.py createsuperuser
+Username (leave blank to use 'gustavo'): admin
+Email address: gustavo@escandarani.com.ar
+Password: SH65026502
+Password (again):
+Superuser created successfully.
+
+
+

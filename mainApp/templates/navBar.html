@@ -1,0 +1,27 @@
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+    <div class="container">
+        <!-- collapsed menu: home link and menu button -->
+        <a class="navbar-brand text-expanded font-weight-bold d-lg-none" 
+           href="{% url 'HOM' %}">
+        {{ menuContent.0.optName }}
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- menu options -->
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav mx-auto">
+                {% for opt in menuContent %}
+                    <li class="nav-item {% if opt.optOrder == menuOpt %}active{% endif %} px-lg-4">
+                        <a class="nav-link text-expanded" href="{% url opt.optType %}{{opt.optOrder}}">
+                        {{opt.optName}}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
