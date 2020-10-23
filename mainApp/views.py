@@ -11,4 +11,7 @@ def mainPage(request, menuOpt = ''):
     return render( request, "mainPage.html", {'menuOpt':menuOpt, 'menuContent':menuContent} )
 
 
+def cssRenderer(request, filename):
+    dictionary = {'colorBlogInfo': 'grey'}
+    return render(request, 'css/' + filename + '.css', dictionary, content_type="text/css")
 

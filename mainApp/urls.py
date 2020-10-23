@@ -12,8 +12,9 @@ from django.conf import settings            # para incluir en urlpatterns las ca
 from django.conf.urls.static import static  # para incluir en urlpatterns las carpetas con las imagenes
 
 urlpatterns = [
-    path('',           views.mainPage,      name='HOM'),
-    path('<menuOpt>',  views.mainPage,      name='HOM'),
+    path('',                       views.mainPage,      name='HOM'),
+    path('<menuOpt>',              views.mainPage,      name='HOM'),
+    path('css/<str:filename>.css', views.cssRenderer,   name='CSS'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

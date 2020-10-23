@@ -10,15 +10,15 @@
 
 <section>
     <div class="container">
-        <div class="row">
+        <div class="row blogRow">
             <div class="col-sm-4">
                 {% if post.postImage %}
-                    <img src="{{post.postImage.url}}" alt="" style="width: 95%;">
+                    <img class="blogImage" src="{{post.postImage.url}}" alt="">
                 {% else %}
-                    <img src="/media{% url 'BLG' %}default.png" alt="" style="width: 95%;">
+                    <img class="blogImage" src="/media{% url 'BLG' %}default.png" alt="">
                 {% endif %}
             </div>
-            <div class="col-sm">
+            <div class="col-sm blogInfo">
                 <h4> {{post.postTitle}} </h2>
                 <p>{{post.postContent}}</p>
                 <div>
