@@ -6,19 +6,40 @@
 
 {% block content %}
 
+<!-- Show the tags and allow to make additional filtering -->
+<section>
+    <div class="myCenteredFlex">
+        <p class="text-center myBGColor myTextColor mySelected">
+            {{optParameter}}
+        </p>
+        <p class="text-center myBGColor myTextColor">
+            <a class="myLink {% if not addFilter %}mySelected{% endif %}" 
+               href="{% url 'BLG' %}{{menuOpt}}">All</a>
+            {% for tag in tags %}
+                &nbsp;|&nbsp; 
+                <a class="myLink {% if tag in addFilter %}mySelected{% endif %}" 
+                   href="{% url 'BLG' %}addFilter/{{menuOpt}}/{{tag}}">  {{ tag }} </a>
+            {% endfor %}
+        </p>
+    </div>
+</section>
+
+
+
 {% for post in posts %}
 
+<!-- Show the posts -->
 <section>
     <div class="container">
-        <div class="row blogRow">
+        <div class="row myRow">
             <div class="col-sm-4">
                 {% if post.postImage %}
-                    <img class="blogImage" src="{{post.postImage.url}}" alt="">
+                    <img class="imageBlock" src="{{post.postImage.url}}" alt="">
                 {% else %}
-                    <img class="blogImage" src="/media{% url 'BLG' %}default.png" alt="">
+                    <img class="imageBlock" src="/media{% url 'BLG' %}default.png" alt="">
                 {% endif %}
             </div>
-            <div class="col-sm blogInfo">
+            <div class="col-sm infoBlock">
                 <h4> {{post.postTitle}} </h2>
                 <p>{{post.postContent}}</p>
                 <div>
@@ -33,17 +54,6 @@
 
 {% endfor %}
 
-<section>
-    <div style="width: 75%; margin: auto; text-align: center;">
-
-        Tags: &nbsp; <a href="{% url 'BLG' %}{{menuOpt}}">All</a>
-
-        {% for tag in tags %}
-            &nbsp;|&nbsp; <a href="{% url 'BLG' %}addFilter/{{menuOpt}}/{{tag}}">  {{ tag }} </a>
-        {% endfor %}
-
-    </div>
-</section>
 
 {% endblock %}
 

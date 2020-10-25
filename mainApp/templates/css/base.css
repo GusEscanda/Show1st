@@ -1,22 +1,53 @@
 
 body {
       background: /* linear-gradient(rgba(47, 23, 15, 0.65), rgba(47, 23, 15, 0.65)), */
-                  url("/media{% url 'HOM' %}industrial-auto.jpg");
+                 url("/media{% url 'HOM' %}industrial-auto.jpg");
       background-attachment: fixed;
       background-position: center;
       background-size: cover;
+      color: white;
     }
 
-.blogRow {
+.myBGColor {
+      background-color: darkblue;
+}
+
+.myTextColor {
+      color: white;
+}
+
+.myLink {
+      text-decoration: none;
+      color: white;
+      background-color: darkblue;
+}
+
+.mySelected {
+      font-weight: bold;
+}
+
+.myFooter {
+      font-style: italic;
+}
+
+.myCenteredFlex {
+      display:flex; 
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+}
+
+
+.myRow {
       margin: 5px 5px;
       padding: 15px 15px;
 }
 
-.blogImage {
-      width: 95%;
+.imageBlock {
+      width: 100%;
 }
 
-.blogInfo {
+.infoBlock {
       /* generated online with a 'css gradient generator' */
       background: rgb(2,0,36); background: linear-gradient( 325deg, rgba(2,0,36,1) 0%, rgba(9,121,86,1) 0%, rgba(0,212,255,1) 100%);
       height: 200px;
