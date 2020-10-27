@@ -12,6 +12,10 @@ def mainPage(request, menuOpt = ''):
 
 
 def cssRenderer(request, filename):
-    dictionary = {'colorinfoBlock': 'grey'}
+    dictionary = {'colorInfoBlock': 'linear-gradient( 325deg, rgba(2,0,36,1) 0%, rgba(9,121,86,1) 0%, rgba(0,212,255,1) 100%)'}
     return render(request, 'css/' + filename + '.css', dictionary, content_type="text/css")
+
+
+def jsRenderer(request, filename):
+    return render(request, 'js/' + filename + '.js', {}, content_type="text/javascript")
 

@@ -49,9 +49,11 @@ body {
 
 .infoBlock {
       /* generated online with a 'css gradient generator' */
-      background: rgb(2,0,36); background: linear-gradient( 325deg, rgba(2,0,36,1) 0%, rgba(9,121,86,1) 0%, rgba(0,212,255,1) 100%);
-      height: 200px;
+      background: rgb(2,0,36); background: {{colorInfoBlock}};
       border-radius: 25px;
       box-shadow: 10px 10px 10px teal; /* <desplaz x> <desplaz y> <difumin> <color> */
-  }
+      margin: 5px 5px;
+      padding: 15px 15px;
+      
+}
 

@@ -23,7 +23,7 @@ class Post(models.Model):
     postTitle    = models.CharField(max_length=50, verbose_name='Title')
     postContent  = models.CharField(max_length=500, verbose_name='Content')
     postImage    = models.ImageField(upload_to='ShowBlog', null=True, blank=True, verbose_name='Image')
-    postAuthor   = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Author')
+    postAuthor   = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name='Author')
     postTags     = models.ManyToManyField(PostTag, verbose_name='Tags')
     created      = models.DateTimeField(auto_now_add=True)
     updated      = models.DateTimeField(auto_now=True)

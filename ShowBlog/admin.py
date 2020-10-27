@@ -18,9 +18,3 @@ class PostAdmin(admin.ModelAdmin):
 admin.site.register(PostTag, PostTagAdmin)
 admin.site.register(Post, PostAdmin)
 
-
-
-
-
-
-

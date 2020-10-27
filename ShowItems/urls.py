@@ -12,8 +12,9 @@ from django.conf import settings            # para incluir en urlpatterns las ca
 from django.conf.urls.static import static  # para incluir en urlpatterns las carpetas con las imagenes
 
 urlpatterns = [
-    path('',           views.showItems,      name='ITM'),
-    path('<menuOpt>',  views.showItems,      name='ITM'),
+    path('',                                 views.showItems,  name='ITM'),
+    path('<menuOpt>',                        views.showItems,  name='ITM'),
+    path('addFilter/<menuOpt>/<addFilter>',  views.showItems,  name='ITM'),        
 ]
 
 

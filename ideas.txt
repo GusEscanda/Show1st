@@ -36,3 +36,15 @@ implementacion:
             asociados y filtrados por categoria. Quiza se pueda generalizar y reusar algo de codigo...
 
 
+Todo:
+
+- Menues:
+    - imagen de fondo para cada opcion de menu
+    - titulo general ( h1 ? ) para cada opcion de menu
+    - menues y submenues? cuantos niveles?
+
+- pensar bien los filtros por categoria/tags (ShowItem/ShowBlog) and? or? uno solo?
+- orden de aparicion para las categorias? imagen de la categoria?
+
+
+

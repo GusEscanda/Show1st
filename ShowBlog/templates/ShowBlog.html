@@ -34,18 +34,22 @@
         <div class="row myRow">
             <div class="col-sm-4">
                 {% if post.postImage %}
-                    <img class="imageBlock" src="{{post.postImage.url}}" alt="">
+                    <img class="imageBlock" src="{{post.postImage.url}}" alt="{{post.postTitle}}">
                 {% else %}
-                    <img class="imageBlock" src="/media{% url 'BLG' %}default.png" alt="">
+                    <img class="imageBlock" src="/media{% url 'BLG' %}default.png" alt="{{post.postTitle}}">
                 {% endif %}
             </div>
             <div class="col-sm infoBlock">
-                <h4> {{post.postTitle}} </h2>
-                <p>{{post.postContent}}</p>
+                <h4> {{post.postTitle}} </h4>
+                <p> {{post.postContent}} </p>
                 <div>
                     Author: {{post.postAuthor}}<br>
                     Date: {{post.postDate}}<br>
-                    Tags: {% for tag in post.postTags.all %} {{tag.tagName}} &nbsp; {% endfor %}
+                    Tags:   {% for tag in post.postTags.all %}
+                                {% if tag.tagName not in optParameter %}
+                                    {{tag.tagName}} &nbsp;
+                                {% endif %}
+                            {% endfor %}
                 </div>
             </div>
         </div>

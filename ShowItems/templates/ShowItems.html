@@ -2,13 +2,61 @@
 
 {% load static %}
 
-{% block title %} Show Items {% endblock %}
+{% block title %} {{optName}} {% endblock %}
 
 {% block content %}
 
-<h2>ShowItems</h2>
-<h2>ShowItems</h2>
-<h2>ShowItems</h2>
+<!-- Show the categories and allow to make additional filtering -->
+<section>
+    <div class="myCenteredFlex">
+        <p class="text-center myBGColor myTextColor mySelected">
+            {{optParameter}}
+        </p>
+        <p class="text-center myBGColor myTextColor">
+            <a class="myLink {% if not addFilter %}mySelected{% endif %}" 
+               href="{% url 'ITM' %}{{menuOpt}}">All</a>
+            {% for cat in cats %}
+                &nbsp;|&nbsp; 
+                <a class="myLink {% if cat == addFilter %}mySelected{% endif %}" 
+                   href="{% url 'ITM' %}addFilter/{{menuOpt}}/{{cat}}">  {{ cat }} </a>
+            {% endfor %}
+        </p>
+    </div>
+</section>
+
+
+<!-- Show the items -->
+<section>
+    <div class="container">
+        <div class="row justify-content-center">
+            {% for item in items %}
+                <div class="col-md-3 infoBlock">
+                    {% if item.itemImage %}
+                        <img class="imageBlock" src="{{item.itemThumb.url}}" alt="{{item.itemName}}">
+                    {% endif %}
+                    <p id="itemName-{{item.id}}"> 
+                        {{item.itemName}} 
+                        <a onclick="swapDisplay('itemName-{{item.id}}','itemDescrip-{{item.id}}');">(+)</a>
+                    </p>
+                    <p id="itemDescrip-{{item.id}}" style="display:none" >
+                        {{item.itemDescrip}}
+                        <a onclick="swapDisplay('itemName-{{item.id}}','itemDescrip-{{item.id}}');">(-)</a>
+                    </p>
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            {% for cat in item.itemCats.all %}
+                                {% if cat.catName not in optParameter %} {{cat.catName}} &nbsp; {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div>
+                            {{item.itemCode}}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
 
 {% endblock %}
 
