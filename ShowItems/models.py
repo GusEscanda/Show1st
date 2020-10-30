@@ -27,7 +27,7 @@ class Item(models.Model):
     itemDescrip  = models.CharField(max_length=500, blank=True, verbose_name='Description')
     itemThumb    = models.ImageField(upload_to='ShowItems', verbose_name='Small (small)')
     itemImage    = models.ImageField(upload_to='ShowItems', null=True, blank=True, verbose_name='Image (big)')
-    itemCats     = models.ManyToManyField(ItemCategory, null=False, verbose_name='Categories')
+    itemCats     = models.ManyToManyField(ItemCategory, verbose_name='Categories')
     created      = models.DateTimeField(auto_now_add=True)
     updated      = models.DateTimeField(auto_now=True)
 

@@ -1,7 +1,11 @@
 
 body {
-      background: /* linear-gradient(rgba(47, 23, 15, 0.65), rgba(47, 23, 15, 0.65)), */
-                 url("/media{% url 'HOM' %}industrial-auto.jpg");
+      background: url("{% if style.styleBGImage %}{{style.styleBGImage.url}}{% endif %}");
+      {% if style.styleBGColor %}
+            background-color: {{style.styleBGColor}};
+      {% else %}
+            background-color: black;
+      {% endif %}
       background-attachment: fixed;
       background-position: center;
       background-size: cover;
@@ -9,17 +13,33 @@ body {
     }
 
 .myBGColor {
-      background-color: darkblue;
+      {% if style.styleTextBGColor %}
+            background-color: {{style.styleTextBGColor}};
+      {% else %}
+            background-color: darkblue;
+      {% endif %}
 }
 
 .myTextColor {
-      color: white;
+      {% if style.styleTextColor %}
+            color: {{style.styleTextColor}};
+      {% else %}
+            color: white;
+      {% endif %}
 }
 
 .myLink {
       text-decoration: none;
-      color: white;
-      background-color: darkblue;
+      {% if style.styleTextColor %}
+            color: {{style.styleTextColor}};
+      {% else %}
+            color: white;
+      {% endif %}
+      {% if style.styleTextBGColor %}
+            background-color: {{style.styleTextBGColor}};
+      {% else %}
+            background-color: darkblue;
+      {% endif %}
 }
 
 .mySelected {
@@ -48,12 +68,16 @@ body {
 }
 
 .infoBlock {
-      /* generated online with a 'css gradient generator' */
-      background: rgb(2,0,36); background: {{colorInfoBlock}};
+      {% if style.styleTextBGColor %}
+            background: {{style.styleTextBGColor}};
+      {% else %}
+            background: darkblue;
+      {% endif %}
+      {% if style.styleInfoBoxColor %}
+            background: {{style.styleInfoBoxColor}};
+      {% endif %}
       border-radius: 25px;
-      box-shadow: 10px 10px 10px teal; /* <desplaz x> <desplaz y> <difumin> <color> */
       margin: 5px 5px;
       padding: 15px 15px;
-      
 }
 

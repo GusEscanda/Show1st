@@ -1,18 +1,28 @@
 from django.shortcuts import render
 
-from .models import MenuOption
+from .models import MenuOption, Style
 
 # Create your views here.
 
 def mainPage(request, menuOpt = ''):
-    menuContent = MenuOption.objects.filter(optEnabled=True).order_by('optOrder')
-    if not menuOpt:
-        menuOpt = menuContent[0].optOrder  # asume that the home page is the 1st one in the MenuOption table
-    return render( request, "mainPage.html", {'menuOpt':menuOpt, 'menuContent':menuContent} )
+    # Obtain the site menu structure
+    menuContent = MenuOption.objects.filter( optEnabled = True ).order_by('optOrder')
+    if menuOpt:
+        opt = menuContent.get( optOrder = menuOpt )
+    else:
+        opt = menuContent[0]  # asume that the home page is the 1st one in the MenuOption table
+    # Init the dictionary to pass to the render
+    dictionary = {
+        'opt': opt, 
+        'menuContent': menuContent, 
+        }
+    return render( request, "mainPage.html", dictionary )
 
 
-def cssRenderer(request, filename):
-    dictionary = {'colorInfoBlock': 'linear-gradient( 325deg, rgba(2,0,36,1) 0%, rgba(9,121,86,1) 0%, rgba(0,212,255,1) 100%)'}
+def cssRenderer(request, sName, filename):
+    dictionary = {}
+    if sName:
+        dictionary['style'] = Style.objects.get( styleName = sName )
     return render(request, 'css/' + filename + '.css', dictionary, content_type="text/css")
 
 

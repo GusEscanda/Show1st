@@ -13,10 +13,10 @@
         <!-- menu options -->
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav mx-auto">
-                {% for opt in menuContent %}
-                    <li class="nav-item {% if opt.optOrder == menuOpt %}active{% endif %} px-lg-4 myBGColor">
-                        <a class="nav-link text-expanded" href="{% url opt.optType %}{{opt.optOrder}}">
-                        {{opt.optName}}
+                {% for i in menuContent %}
+                    <li class="nav-item {% if i.optOrder == opt.optOrder %}active{% endif %} px-lg-4 myBGColor">
+                        <a class="nav-link text-expanded" href="{% url i.optType %}{{i.optOrder}}">
+                        {{i.optName}}
                         </a>
                     </li>
                 {% endfor %}

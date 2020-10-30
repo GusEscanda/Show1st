@@ -11,10 +11,8 @@ def showItems(request, menuOpt, addFilter=''):
     opt = menuContent.get( optOrder = menuOpt )
     # Init the dictionary to pass to the render
     dictionary = {
-        'menuOpt': menuOpt, 
+        'opt': opt, 
         'menuContent': menuContent, 
-        'optName': opt.optName, 
-        'optParameter': opt.optParameter,
         }
     # Obtain the items, optionally filtered by the opt.optParameter
     filter = opt.optParameter
