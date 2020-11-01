@@ -6,12 +6,12 @@ Swaps the style.display value of the two elements received.
   the other to swap the link that triggers the swapping, so you can "change"
   it's text or image
 */
-function swapDisplay( _elementIdA, _elementIdB ) {
-    const elementA = document.getElementById(_elementIdA);
-    const elementB = document.getElementById(_elementIdB);
-    const displayA = elementA.style.display;
-    const displayB = elementB.style.display;
-    elementA.style.display = displayB;
-    elementB.style.display = displayA;
-}
 
+const swapDisplay = (_elementIdA, _elementIdB) => {
+  const elementA = document.getElementById(_elementIdA)
+  const elementB = document.getElementById(_elementIdB)
+  const displayA = elementA.style.display
+  const displayB = elementB.style.display
+  elementA.style.display = displayB
+  elementB.style.display = displayA
+}

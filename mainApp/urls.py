@@ -14,7 +14,7 @@ from django.conf.urls.static import static  # para incluir en urlpatterns las ca
 urlpatterns = [
     path('',                                        views.mainPage,      name='HOM'),
     path('<menuOpt>',                               views.mainPage,      name='HOM'),
-    path('css/<str:sName>/<str:filename>.css',    views.cssRenderer),
+    path('css/<str:sName>/<str:filename>.css',      views.cssRenderer),
     path('js/<str:filename>.js',                    views.jsRenderer),
 ]
 

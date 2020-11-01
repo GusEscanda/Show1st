@@ -18,9 +18,9 @@ def showBlog(request, menuOpt, addFilter=''):
     filter = opt.optParameter
     if filter:
         filter = [ f.strip() for f in filter.split(',') ] # convert the string into a list
-        myPosts = Post.objects.filter( postTags__tagName__in = filter ).order_by('postDate')
+        myPosts = Post.objects.filter( postTags__tagName__in = filter ).order_by('-postDate')
     else:
-        myPosts = Post.objects.all().order_by('postDate')
+        myPosts = Post.objects.all().order_by('-postDate')
     # Obtain a list (without duplicates) of ALL the tags that appear in any of the MENU FILTERED posts
     allTags = []
     for post in myPosts:
@@ -31,7 +31,7 @@ def showBlog(request, menuOpt, addFilter=''):
     filter = addFilter
     if filter:
         filter = [ f.strip() for f in filter.split(',') ] # convert the string into a list
-        myPosts = myPosts.filter( postTags__tagName__in = filter ).order_by('postDate')
+        myPosts = myPosts.filter( postTags__tagName__in = filter ).order_by('-postDate')
     # Complete the dictionary
     dictionary['posts'] = myPosts
     dictionary['tags'] = allTags

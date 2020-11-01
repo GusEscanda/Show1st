@@ -39,7 +39,7 @@
             </div>
             <div class="col-sm infoBlock">
                 <h4> {{post.postTitle}} </h4>
-                <p> {{post.postContent}} </p>
+                <p> {{ post.postContent | linebreaks }} </p>
                 <div>
                     Author: {{post.postAuthor}}<br>
                     Date: {{post.postDate}}<br>

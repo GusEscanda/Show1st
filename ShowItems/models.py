@@ -23,8 +23,8 @@ class ItemCategory(models.Model):
 
 class Item(models.Model):
     itemCode     = models.CharField(max_length=20, db_index=True, verbose_name='Code')
-    itemName     = models.CharField(max_length=50, verbose_name='Name')
-    itemDescrip  = models.CharField(max_length=500, blank=True, verbose_name='Description')
+    itemName     = models.CharField(max_length=60, verbose_name='Name')
+    itemDescrip  = models.TextField(blank=True, verbose_name='Description')
     itemThumb    = models.ImageField(upload_to='ShowItems', verbose_name='Small (small)')
     itemImage    = models.ImageField(upload_to='ShowItems', null=True, blank=True, verbose_name='Image (big)')
     itemCats     = models.ManyToManyField(ItemCategory, verbose_name='Categories')

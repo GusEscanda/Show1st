@@ -1,45 +1,81 @@
 
+/* CSS reset */
+
+*,
+*::before,
+*::after {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+}
+
+ul,
+ol {
+      list-style: none;
+}
+
+a {
+      color: inherit;
+      text-decoration: none;
+}
+
+
+/* Set user defined style vars */
+
+:root {
+
+      {% if style.styleBGColor %}
+            --styleBGColor: {{style.styleBGColor}};
+      {% endif %}
+
+      {% if style.styleTextBGColor %}
+            --styleTextBGColor: {{style.styleTextBGColor}};
+      {% endif %}
+
+      {% if style.styleTextColor %}
+            --styleTextColor: {{style.styleTextColor}};
+      {% endif %}
+
+      {% if style.styleInfoBoxColor %}
+            --styleInfoBoxColor: {{style.styleInfoBoxColor}};
+      {% endif %}
+
+}
+
+/* My styles */
+
 body {
       background: url("{% if style.styleBGImage %}{{style.styleBGImage.url}}{% endif %}");
-      {% if style.styleBGColor %}
-            background-color: {{style.styleBGColor}};
-      {% else %}
-            background-color: black;
-      {% endif %}
+      background-color: var(--styleBGColor,black) ;
       background-attachment: fixed;
       background-position: center;
       background-size: cover;
-      color: white;
+      color: var(--styleTextColor,white);
     }
 
+.cursorPointer {
+      display: inline-block;
+      cursor: pointer;
+}
+
 .myBGColor {
-      {% if style.styleTextBGColor %}
-            background-color: {{style.styleTextBGColor}};
-      {% else %}
-            background-color: darkblue;
-      {% endif %}
+      background-color: var(--styleTextBGColor,darkblue);
 }
 
 .myTextColor {
-      {% if style.styleTextColor %}
-            color: {{style.styleTextColor}};
-      {% else %}
-            color: white;
-      {% endif %}
+      color: var(--styleTextColor,white);
 }
 
 .myLink {
+      text-decoration: underline;
+      color: var(--styleTextColor,white);
+      background-color: var(--styleTextBGColor,darkblue);
+}
+
+.myLink:hover {
       text-decoration: none;
-      {% if style.styleTextColor %}
-            color: {{style.styleTextColor}};
-      {% else %}
-            color: white;
-      {% endif %}
-      {% if style.styleTextBGColor %}
-            background-color: {{style.styleTextBGColor}};
-      {% else %}
-            background-color: darkblue;
-      {% endif %}
+      color: var(--styleTextColor,white);
+      background-color: var(--styleTextBGColor,darkblue);
 }
 
 .mySelected {
@@ -68,14 +104,7 @@ body {
 }
 
 .infoBlock {
-      {% if style.styleTextBGColor %}
-            background: {{style.styleTextBGColor}};
-      {% else %}
-            background: darkblue;
-      {% endif %}
-      {% if style.styleInfoBoxColor %}
-            background: {{style.styleInfoBoxColor}};
-      {% endif %}
+      background: var(--styleInfoBoxColor,darkblue);
       border-radius: 25px;
       margin: 5px 5px;
       padding: 15px 15px;

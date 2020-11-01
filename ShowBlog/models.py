@@ -5,7 +5,7 @@ import datetime
 # Create your models here.
 
 class PostTag(models.Model):
-    tagName   = models.CharField(max_length=30, unique=True, verbose_name='Tag')
+    tagName  = models.CharField(max_length=30, unique=True, verbose_name='Tag')
     created  = models.DateTimeField(auto_now_add=True)
     updated  = models.DateTimeField(auto_now=True)
     
@@ -20,8 +20,8 @@ class PostTag(models.Model):
 
 class Post(models.Model):
     postDate     = models.DateField(default=datetime.date.today, db_index=True, verbose_name='Date')
-    postTitle    = models.CharField(max_length=50, verbose_name='Title')
-    postContent  = models.CharField(max_length=500, verbose_name='Content')
+    postTitle    = models.CharField(max_length=60, verbose_name='Title')
+    postContent  = models.TextField(verbose_name='Content')
     postImage    = models.ImageField(upload_to='ShowBlog', null=True, blank=True, verbose_name='Image')
     postAuthor   = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name='Author')
     postTags     = models.ManyToManyField(PostTag, verbose_name='Tags')

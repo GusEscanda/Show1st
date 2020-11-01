@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 class Style(models.Model):
-    styleName         = models.CharField(max_length=20, blank=False, unique=True, verbose_name='Style Name')
+    styleName         = models.SlugField(max_length=20, blank=False, unique=True, verbose_name='Style Name')
     styleBGColor      = models.CharField(max_length=120, blank=True, verbose_name='Background color')
     styleBGImage      = models.ImageField(upload_to='mainApp', null=True, blank=True, verbose_name='Background Image')
     styleTextColor    = models.CharField(max_length=120, blank=True, verbose_name='Text color')
@@ -28,7 +28,7 @@ class MenuOption(models.Model):
     CONTACT = 'CON'
     ITEMS   = 'ITM'
 
-    optOrder      = models.CharField(max_length=10, unique=True, verbose_name='Order')
+    optOrder      = models.SlugField(max_length=10, unique=True, verbose_name='Order')
     optEnabled    = models.BooleanField(default=True, verbose_name='Enabled')
     optName       = models.CharField(max_length=30, blank=False, verbose_name='Option Name')
     optType       = models.CharField( 
@@ -41,7 +41,7 @@ class MenuOption(models.Model):
                       default=INFO,
                       verbose_name='Option Type'
                     )
-    optParameter  = models.CharField(max_length=60, blank=True, verbose_name='Aditional Parameter')
+    optParameter  = models.CharField(max_length=120, blank=True, verbose_name='Aditional Parameter')
     optStyle      = models.ForeignKey(Style, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Style')
     optMainTitle  = models.CharField(max_length=60, blank=False, verbose_name='Main title')
     optImageTitle = models.ImageField(upload_to='mainApp', null=True, blank=True, verbose_name='Image title')
