@@ -37,6 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    # django-tinymce module. Rich Text, wysiwyg editor for using in some text fields
+    # https://github.com/jazzband/django-tinymce
+    'tinymce', 
+
+    # My apps
     'mainApp',
     'ShowContact',
     'ShowInfo',

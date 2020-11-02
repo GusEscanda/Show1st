@@ -2,6 +2,8 @@ from django.shortcuts import render
 
 from mainApp.models import MenuOption
 
+from .models import InfoPage
+
 # Create your views here.
 
 def showInfo(request, menuOpt):
@@ -13,6 +15,8 @@ def showInfo(request, menuOpt):
         'opt': opt, 
         'menuContent': menuContent, 
         }
+    inf = InfoPage.objects.get(infName = opt.optParameter)
+    dictionary['inf'] = inf
     return render( request, "ShowInfo.html", dictionary )
 
 

@@ -23,5 +23,9 @@ urlpatterns = [
     path('ShowBlog/',       include('ShowBlog.urls')),
     path('ShowInfo/',       include('ShowInfo.urls')),
     path('ShowItems/',      include('ShowItems.urls')),
+
+    # django-tinymce module. Rich Text, wysiwyg editor for using in some text fields
+    # https://github.com/jazzband/django-tinymce
+    path('tinymce/',        include('tinymce.urls')),
 ]
 

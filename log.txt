@@ -37,5 +37,22 @@ Password: SH65026502
 Password (again):
 Superuser created successfully.
 
+- Comenzar a desarrollar ShowBlog y ShowItems con sus modelos de datos, views y templates
 
+- Arrancando con ShowInfo me doy cuenta de la necesidad de un editor wysiwyg para rich text
+
+pagina para buscar herramientas (add-ons) de django: https://djangopackages.org/
+
+para lo que buscaba elegi: https://github.com/jazzband/django-tinymce
+
+> pip install django-tinymce
+
+en settings.py, dentro de INSTALLED_APPS, agregar 'tinymce'
+en Show1st/urls.py, dentro de urlpatterns, agregar path('tinymce/', include('tinymce.urls'))
+
+
+- Crear el 1er esbozo de modelo, configurar el admin.py, cargar un texto y mostrarlo
+  con una view y un template simples...
+
+  
 

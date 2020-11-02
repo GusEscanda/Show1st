@@ -4,8 +4,10 @@
 
 {% block content %}
 
-<h2>ShowInfo</h2>
-<h2>ShowInfo</h2>
-<h2>ShowInfo</h2>
+<p> {{ inf.infName }} </p>
+
+<div>
+    {{ inf.infText | safe }}
+</div>
 
 {% endblock %}
