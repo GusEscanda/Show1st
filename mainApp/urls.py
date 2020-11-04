@@ -6,14 +6,15 @@ del sitio
 
 from django.urls import path
 
+from .models import MenuOption
 from . import views
 
 from django.conf import settings            # para incluir en urlpatterns las carpetas con las imagenes
 from django.conf.urls.static import static  # para incluir en urlpatterns las carpetas con las imagenes
 
 urlpatterns = [
-    path('',                                        views.mainPage,      name='HOM'),
-    path('<menuOpt>',                               views.mainPage,      name='HOM'),
+    path('',                                        views.mainPage,      name=MenuOption.HOME),
+    path('<menuOpt>',                               views.mainPage,      name=MenuOption.HOME),
     path('css/<str:sName>/<str:filename>.css',      views.cssRenderer),
     path('js/<str:filename>.js',                    views.jsRenderer),
 ]

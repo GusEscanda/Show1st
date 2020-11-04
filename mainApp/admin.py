@@ -5,7 +5,7 @@ from .models import MenuOption, Style
 # Register your models here.
 
 class MenuOptionAdmin(admin.ModelAdmin):
-    list_display=("optOrder", "optEnabled", "optName", "optType", "optParameter")
+    list_display=("optOrder", "optType", "optName", "optApp", "optParameter")
     readonly_fields=('created','updated')
     ordering = ['optOrder']
 

@@ -4,7 +4,7 @@
     <div class="container">
         <!-- collapsed menu: home link and menu button -->
         <a class="navbar-brand text-expanded font-weight-bold d-lg-none" 
-           href="{% url 'HOM' %}">
+           href="{% url opt.HOME %}">
         {{ menuContent.0.optName }}
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,7 +15,7 @@
             <ul class="navbar-nav mx-auto">
                 {% for i in menuContent %}
                     <li class="nav-item {% if i.optOrder == opt.optOrder %}active{% endif %} px-lg-4 myBGColor">
-                        <a class="nav-link text-expanded" href="{% url i.optType %}{{i.optOrder}}">
+                        <a class="nav-link text-expanded" href="{% url i.optApp %}{{i.optOrder}}">
                         {{i.optName}}
                         </a>
                     </li>

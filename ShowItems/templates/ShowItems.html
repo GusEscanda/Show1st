@@ -12,11 +12,11 @@
         </p>
         <p class="text-center myBGColor myTextColor">
             <a class="myLink {% if not addFilter %}mySelected{% endif %}" 
-               href="{% url 'ITM' %}{{opt.optOrder}}">All</a>
+               href="{% url opt.ITEMS %}{{opt.optOrder}}">All</a>
             {% for cat in cats %}
                 &nbsp;|&nbsp; 
                 <a class="myLink {% if cat == addFilter %}mySelected{% endif %}" 
-                   href="{% url 'ITM' %}addFilter/{{opt.optOrder}}/{{cat}}">  {{ cat }} </a>
+                   href="{% url opt.ITEMS %}addFilter/{{opt.optOrder}}/{{cat}}">  {{ cat }} </a>
             {% endfor %}
         </p>
     </div>

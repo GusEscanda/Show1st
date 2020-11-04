@@ -12,11 +12,11 @@
         </p>
         <p class="text-center myBGColor myTextColor">
             <a class="myLink {% if not addFilter %}mySelected{% endif %}" 
-               href="{% url 'BLG' %}{{opt.optOrder}}">All</a>
+               href="{% url opt.BLOG %}{{opt.optOrder}}">All</a>
             {% for tag in tags %}
                 &nbsp;|&nbsp; 
                 <a class="myLink {% if tag in addFilter %}mySelected{% endif %}" 
-                   href="{% url 'BLG' %}addFilter/{{opt.optOrder}}/{{tag}}">  {{ tag }} </a>
+                   href="{% url opt.BLOG %}addFilter/{{opt.optOrder}}/{{tag}}">  {{ tag }} </a>
             {% endfor %}
         </p>
     </div>
@@ -34,7 +34,7 @@
                 {% if post.postImage %}
                     <img class="imageBlock" src="{{post.postImage.url}}" alt="{{post.postTitle}}">
                 {% else %}
-                    <img class="imageBlock" src="/media{% url 'BLG' %}default.png" alt="{{post.postTitle}}">
+                    <img class="imageBlock" src="/media{% url opt.BLOG %}default.png" alt="{{post.postTitle}}">
                 {% endif %}
             </div>
             <div class="col-sm infoBlock">

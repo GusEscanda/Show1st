@@ -28,19 +28,28 @@ class MenuOption(models.Model):
     CONTACT = 'CON'
     ITEMS   = 'ITM'
 
+    NAVBAR = 'NAVBAR'
+    FOOTER = 'FOOTER'
+
     optOrder      = models.SlugField(max_length=10, unique=True, verbose_name='Order')
-    optEnabled    = models.BooleanField(default=True, verbose_name='Enabled')
     optName       = models.CharField(max_length=30, blank=False, verbose_name='Option Name')
     optType       = models.CharField( 
-                      max_length=3, 
-                      choices=[ (HOME,    'Home'), 
-                                (INFO,    'ShowInfo'), 
-                                (BLOG,    'ShowBlog'), 
-                                (CONTACT, 'ShowContact'),
-                                (ITEMS,   'ShowItems') ], 
-                      default=INFO,
+                      max_length=6, 
+                      choices=[ (NAVBAR, 'NavBar'), 
+                                (FOOTER, 'Footer') ], 
+                      default=NAVBAR,
                       verbose_name='Option Type'
                     )
+    optApp        = models.CharField( 
+                       max_length=3, 
+                       choices=[ (HOME,    'Home'), 
+                                 (INFO,    'ShowInfo'), 
+                                 (BLOG,    'ShowBlog'), 
+                                 (CONTACT, 'ShowContact'),
+                                 (ITEMS,   'ShowItems') ], 
+                       default=INFO,
+                       verbose_name='Option App'
+                     )
     optParameter  = models.CharField(max_length=120, blank=True, verbose_name='Aditional Parameter')
     optStyle      = models.ForeignKey(Style, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Style')
     optMainTitle  = models.CharField(max_length=60, blank=False, verbose_name='Main title')

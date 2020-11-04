@@ -6,7 +6,7 @@ from .models import MenuOption, Style
 
 def mainPage(request, menuOpt = ''):
     # Obtain the site menu structure
-    menuContent = MenuOption.objects.filter( optEnabled = True ).order_by('optOrder')
+    menuContent = MenuOption.objects.filter( optType = MenuOption.NAVBAR ).order_by('optOrder')
     if menuOpt:
         opt = menuContent.get( optOrder = menuOpt )
     else:
