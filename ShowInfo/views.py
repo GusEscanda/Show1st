@@ -6,16 +6,13 @@ from .models import InfoPage
 
 # Create your views here.
 
-def showInfo(request, menuOpt):
+def showInfo(request, menuOpt, infoPage=''):
     # Obtain the site menu structure
-    menuContent = MenuOption.objects.filter( optType = MenuOption.NAVBAR ).order_by('optOrder')
-    opt = menuContent.get( optOrder = menuOpt )
+    menu = MenuOption.objects.all().order_by('optOrder')
+    opt = menu.get( optOrder = menuOpt )
     # Init the dictionary to pass to the render
-    dictionary = {
-        'opt': opt, 
-        'menuContent': menuContent, 
-        }
-    inf = InfoPage.objects.get(infCode = opt.optParameter)
+    dictionary = { 'opt': opt, 'menu': menu }
+    inf = InfoPage.objects.get(infCode = (infoPage if infoPage else opt.optParameter) )
     dictionary['inf'] = inf
     return render( request, "ShowInfo.html", dictionary )
 

@@ -6,16 +6,13 @@ from .models import MenuOption, Style
 
 def mainPage(request, menuOpt = ''):
     # Obtain the site menu structure
-    menuContent = MenuOption.objects.filter( optType = MenuOption.NAVBAR ).order_by('optOrder')
+    menu = MenuOption.objects.all().order_by('optOrder')
     if menuOpt:
-        opt = menuContent.get( optOrder = menuOpt )
+        opt = menu.get( optOrder = menuOpt )
     else:
-        opt = menuContent[0]  # asume that the home page is the 1st one in the MenuOption table
+        opt = menu[0]  # asume that the home page is the 1st one in the MenuOption table
     # Init the dictionary to pass to the render
-    dictionary = {
-        'opt': opt, 
-        'menuContent': menuContent, 
-        }
+    dictionary = { 'opt': opt, 'menu': menu }
     return render( request, "mainPage.html", dictionary )
 
 

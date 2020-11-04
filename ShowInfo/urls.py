@@ -13,8 +13,9 @@ from django.conf import settings            # para incluir en urlpatterns las ca
 from django.conf.urls.static import static  # para incluir en urlpatterns las carpetas con las imagenes
 
 urlpatterns = [
-    path('',           views.showInfo,      name=MenuOption.INFO),
-    path('<menuOpt>',  views.showInfo,      name=MenuOption.INFO),
+    path('',                               views.showInfo,   name=MenuOption.INFO),
+    path('<menuOpt>',                      views.showInfo,   name=MenuOption.INFO),
+    path('infoPage/<menuOpt>/<infoPage>',  views.showInfo,   name=MenuOption.INFO),
 ]
 
 

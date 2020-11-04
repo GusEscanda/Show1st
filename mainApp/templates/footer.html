@@ -4,9 +4,11 @@
 <footer class="footer text-faded text-center py-5">
     <div class="container">
         <p class="m-0 mbt">
-            <a href="sample.html" class="myLink myFooter">Política de privacidad</a> ·
-            <a href="sample.html" class="myLink myFooter">Aviso legal</a> ·
-            <a href="sample.html" class="myLink myFooter">Cookies</a>
+            {% for i in menu %}
+                {% if i.optType == i.FOOTER %}
+                    <a class="myLink myFooter" href="{% url i.INFO %}{{i.optOrder}}">{{i.optName}}</a> ·
+                {% endif %}
+            {% endfor %}
         </p>
         <p class="m-0 mbt1">&copy; GusEscanda 2020</p>
     </div>

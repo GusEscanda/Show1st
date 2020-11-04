@@ -8,7 +8,7 @@ class InfoPageAdmin(admin.ModelAdmin):
     list_display = ("infCode","infName")
     filter_horizontal = ('infLinks',)
     readonly_fields = ('created','updated')
-    ordering = ['infName']
+    ordering = ['infCode']
 
 
 admin.site.register(InfoPage, InfoPageAdmin)

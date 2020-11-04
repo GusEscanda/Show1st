@@ -6,13 +6,10 @@ from mainApp.models import MenuOption
 
 def showContact(request, menuOpt):
     # Obtain the site menu structure
-    menuContent = MenuOption.objects.filter( optType = MenuOption.NAVBAR ).order_by('optOrder')
-    opt = menuContent.get( optOrder = menuOpt )
+    menu = MenuOption.objects.all().order_by('optOrder')
+    opt = menu.get( optOrder = menuOpt )
     # Init the dictionary to pass to the render
-    dictionary = {
-        'opt': opt, 
-        'menuContent': menuContent, 
-        }
+    dictionary = { 'opt': opt, 'menu': menu }
     return render( request, "ShowContact.html", dictionary )
 
 

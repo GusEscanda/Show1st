@@ -4,9 +4,21 @@
 
 {% block content %}
 
-<p> {{ inf.infName }} </p>
+<!-- Show the links of the InfoPages linked to this one -->
+<section>
+    <div class="myCenteredFlex">
+        <p class="text-center myBGColor myTextColor">
+            {% for link in inf.infLinks.all %}
+                &nbsp;&nbsp; 
+                <a class="myLink" 
+                   href="{% url opt.INFO %}infoPage/{{opt.optOrder}}/{{link.infCode}}">  {{ link.infName }} </a>
+                &nbsp;&nbsp; 
+            {% endfor %}
+        </p>
+    </div>
+</section>
 
-<div>
+<div class="infoBlock">
     {{ inf.infText | safe }}
 </div>
 
