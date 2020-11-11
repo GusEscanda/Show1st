@@ -4,9 +4,9 @@
 <footer class="footer text-faded text-center py-5">
     <div class="container">
         <p class="m-0 mbt">
-            {% for i in menu %}
-                {% if i.optType == i.FOOTER %}
-                    <a class="myLink myFooter" href="{% url i.INFO %}{{i.optOrder}}">{{i.optName}}</a> ·
+            {% for opt in menuOptions %}
+                {% if opt.location == opt.FOOTER %}
+                    <a class="myLink myFooter" href="{% url opt.INFO %}{{opt.id}}">{{opt.name}}</a> ·
                 {% endif %}
             {% endfor %}
         </p>

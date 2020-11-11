@@ -55,4 +55,10 @@ en Show1st/urls.py, dentro de urlpatterns, agregar path('tinymce/', include('tin
   con una view y un template simples...
 
   
+****
+**** Hago "cirugia mayor" redefino la forma en que se guardan los menues. Ahora no son menues sino Paginas
+**** y cada tipo de Pagina es una subclase de Pagina con sus caracteristicas propias.
+****
+
+Reviso TODOS los urls, admin, view y templates de TODAS las apps.
 

@@ -1,14 +1,11 @@
 from django.db import models
 
-# Create your models here.
-
-from django.db import models
-import datetime
+from mainApp.models import Page
 
 # Create your models here.
 
 class ItemCategory(models.Model):
-    catName   = models.CharField(max_length=30, unique=True, verbose_name='Category')
+    catName  = models.CharField(max_length=30, unique=True, verbose_name='Category')
     created  = models.DateTimeField(auto_now_add=True)
     updated  = models.DateTimeField(auto_now=True)
     
@@ -19,6 +16,20 @@ class ItemCategory(models.Model):
     def __str__(self):
         return self.catName
 
+
+class ItemsPage( Page ):
+
+    pageFilter = models.ForeignKey( ItemCategory, 
+                                    on_delete=models.CASCADE, 
+                                    null=True, 
+                                    blank=True, 
+                                    verbose_name='Filter Category'
+                                   )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.app = Page.ITEMS
+        self.location = Page.NAVBAR
 
 
 class Item(models.Model):

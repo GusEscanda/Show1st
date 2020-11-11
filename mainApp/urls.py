@@ -1,20 +1,14 @@
-"""
-Archivo urls.py especifico de la aplicacion. En caso de tener muchas aplicaciones y muchas urls, 
-organizo poniendo las urls de cada app en un archivo propio y despues importo todos esos al urls.py general
-del sitio
-"""
-
 from django.urls import path
 
-from .models import MenuOption
+from .models import Page
 from . import views
 
 from django.conf import settings            # para incluir en urlpatterns las carpetas con las imagenes
 from django.conf.urls.static import static  # para incluir en urlpatterns las carpetas con las imagenes
 
 urlpatterns = [
-    path('',                                        views.mainPage,      name=MenuOption.HOME),
-    path('<menuOpt>',                               views.mainPage,      name=MenuOption.HOME),
+    path('',                                        views.mainPage,      name = Page.HOME),
+    path('<int:pageId>',                            views.mainPage,      name = Page.HOME),
     path('css/<str:sName>/<str:filename>.css',      views.cssRenderer),
     path('js/<str:filename>.js',                    views.jsRenderer),
 ]

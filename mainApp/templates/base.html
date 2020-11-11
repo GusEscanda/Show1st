@@ -12,28 +12,28 @@
 
         <!-- My Styles -->
         
-        <link rel="stylesheet" type="text/css" href="{% url opt.HOME %}css/{{opt.optStyle}}/base.css">
+        <link rel="stylesheet" type="text/css" href="{% url page.HOME %}css/{{page.style}}/base.css">
 
         <!-- My Javascript code -->
-        <script src="{% url opt.HOME %}js/base.js" type="text/javascript"></script>
+        <script src="{% url page.HOME %}js/base.js" type="text/javascript"></script>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet"> 
         <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
 
         <!-- set favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="/media{% url opt.HOME %}favicon.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="/media{% url page.HOME %}favicon.ico">
       
-        <title>{{opt.optMainTitle}}</title>
+        <title>{{page.mainTitle}}</title>
     </head>
 
     <body>
-        {% if opt.optImageTitle %}
-            <h1 style="display: none"> {{opt.optMainTitle}} </h1>   <!-- Nico says that there must be one and only one h1 tag -->
-            <p style="text-align:center"> <img src="{{opt.optImageTitle.url}}" alt="{{opt.optMainTitle}}"> </p>
+        {% if page.imageTitle %}
+            <h1 style="display: none"> {{page.mainTitle}} </h1>   <!-- Nico says that there must be one and only one h1 tag -->
+            <p style="text-align:center"> <img src="{{page.imageTitle.url}}" alt="{{page.mainTitle}}"> </p>
         {% else %}
             <h1 class="site-heading text-center d-none d-lg-block myBGColor">
-                <span class="site-heading-lower"> {{opt.optMainTitle}} </span>
+                <span class="site-heading-lower"> {{page.mainTitle}} </span>
             </h1>
         {% endif %}
         

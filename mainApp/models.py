@@ -21,7 +21,52 @@ class Style(models.Model):
 
 
 
-class MenuOption(models.Model):
+#class MenuOption(models.Model):
+#    HOME    = 'HOM'
+#    INFO    = 'INF'
+#    BLOG    = 'BLG'
+#    CONTACT = 'CON'
+#    ITEMS   = 'ITM'
+#
+#    NAVBAR = 'NAVBAR'
+#    FOOTER = 'FOOTER'
+#
+#    optOrder      = models.SlugField(max_length=10, unique=True, verbose_name='Order')
+#    optName       = models.CharField(max_length=30, blank=False, verbose_name='Option Name')
+#    optType       = models.CharField( 
+#                      max_length=6, 
+#                      choices=[ (NAVBAR, 'NavBar'), 
+#                                (FOOTER, 'Footer') ], 
+#                      default=NAVBAR,
+#                      verbose_name='Option Type'
+#                    )
+#    optApp        = models.CharField( 
+#                       max_length=3, 
+#                       choices=[ (HOME,    'Home'), 
+#                                 (INFO,    'ShowInfo'), 
+#                                 (BLOG,    'ShowBlog'), 
+#                                 (CONTACT, 'ShowContact'),
+#                                 (ITEMS,   'ShowItems') ], 
+#                       default=INFO,
+#                       verbose_name='Option App'
+#                     )
+#    optParameter  = models.CharField(max_length=120, blank=True, verbose_name='Aditional Parameter')
+#    optStyle      = models.ForeignKey(Style, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Style')
+#    optMainTitle  = models.CharField(max_length=60, blank=False, verbose_name='Main title')
+#    optImageTitle = models.ImageField(upload_to='mainApp', null=True, blank=True, verbose_name='Image title')
+#    created       = models.DateTimeField(auto_now_add=True)
+#    updated       = models.DateTimeField(auto_now=True)
+#    
+#    class Meta:
+#        verbose_name='menu option'
+#        verbose_name_plural='menu options'
+#    
+#    def __str__(self):
+#        return self.optOrder + ' ' + self.optName + ( ' - ' + self.optParameter if self.optParameter else '' )
+
+
+class Page(models.Model):
+
     HOME    = 'HOM'
     INFO    = 'INF'
     BLOG    = 'BLG'
@@ -31,38 +76,45 @@ class MenuOption(models.Model):
     NAVBAR = 'NAVBAR'
     FOOTER = 'FOOTER'
 
-    optOrder      = models.SlugField(max_length=10, unique=True, verbose_name='Order')
-    optName       = models.CharField(max_length=30, blank=False, verbose_name='Option Name')
-    optType       = models.CharField( 
-                      max_length=6, 
-                      choices=[ (NAVBAR, 'NavBar'), 
-                                (FOOTER, 'Footer') ], 
-                      default=NAVBAR,
-                      verbose_name='Option Type'
+    app           = models.CharField( 
+                        max_length=3, 
+                        choices=[   (HOME,    'Home'), 
+                                    (INFO,    'ShowInfo'), 
+                                    (BLOG,    'ShowBlog'), 
+                                    (CONTACT, 'ShowContact'),
+                                    (ITEMS,   'ShowItems') ], 
+                        blank=False,
+                        verbose_name='Option App'
                     )
-    optApp        = models.CharField( 
-                       max_length=3, 
-                       choices=[ (HOME,    'Home'), 
-                                 (INFO,    'ShowInfo'), 
-                                 (BLOG,    'ShowBlog'), 
-                                 (CONTACT, 'ShowContact'),
-                                 (ITEMS,   'ShowItems') ], 
-                       default=INFO,
-                       verbose_name='Option App'
-                     )
-    optParameter  = models.CharField(max_length=120, blank=True, verbose_name='Aditional Parameter')
-    optStyle      = models.ForeignKey(Style, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Style')
-    optMainTitle  = models.CharField(max_length=60, blank=False, verbose_name='Main title')
-    optImageTitle = models.ImageField(upload_to='mainApp', null=True, blank=True, verbose_name='Image title')
+    location      = models.CharField( 
+                        max_length=6, 
+                        choices=[   (NAVBAR, 'NavBar'), 
+                                    (FOOTER, 'Footer') ], 
+                        blank=True,
+                        verbose_name='Location'
+                    )
+    position      = models.PositiveIntegerField(unique=True, verbose_name='Position')
+    name          = models.CharField(max_length=30, blank=False, verbose_name='Name')
+    mainTitle     = models.CharField(max_length=60, blank=False, verbose_name='Main title')
+    imageTitle    = models.ImageField(upload_to='mainApp', null=True, blank=True, verbose_name='Image title')
+    style         = models.ForeignKey(Style, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Style')
     created       = models.DateTimeField(auto_now_add=True)
     updated       = models.DateTimeField(auto_now=True)
     
     class Meta:
-        verbose_name='menu option'
-        verbose_name_plural='menu options'
+        verbose_name='page'
+        verbose_name_plural='pages'
     
     def __str__(self):
-        return self.optOrder + ' ' + self.optName + ( ' - ' + self.optParameter if self.optParameter else '' )
+        return '{0} - {1} - {2} - {3}'.format(self.position, self.app, self.location, self.name)
 
+
+class HomePage( Page ):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.app = Page.HOME
+        self.location = Page.NAVBAR
+        self.position = 0
 
 

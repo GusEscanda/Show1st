@@ -8,10 +8,12 @@
 <section>
     <div class="myCenteredFlex">
         <p class="text-center myBGColor myTextColor">
-            {% for link in inf.infLinks.all %}
+            {% for link in page.infLinks.all %}
                 &nbsp;&nbsp; 
-                <a class="myLink" 
-                   href="{% url opt.INFO %}infoPage/{{opt.optOrder}}/{{link.infCode}}">  {{ link.infName }} </a>
+                <a class="myLink {% if page.id == link.id %}mySelected{% endif %}"
+                    href="{% url page.INFO %}infoPage/{{pageId}}/{{link.id}}">
+                        {{ link.name }}
+                </a>
                 &nbsp;&nbsp; 
             {% endfor %}
         </p>
@@ -19,7 +21,7 @@
 </section>
 
 <div class="infoBlock">
-    {{ inf.infText | safe }}
+    {{ page.infText | safe }}
 </div>
 
 {% endblock %}

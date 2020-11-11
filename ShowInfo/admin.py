@@ -5,11 +5,10 @@ from .models import InfoPage
 # Register your models here.
 
 class InfoPageAdmin(admin.ModelAdmin):
-    list_display = ("infCode","infName")
+    list_display=("position", "app", "location", "name")
     filter_horizontal = ('infLinks',)
-    readonly_fields = ('created','updated')
-    ordering = ['infCode']
-
+    readonly_fields=('app','created','updated')
+    ordering = ['position']
 
 admin.site.register(InfoPage, InfoPageAdmin)
 

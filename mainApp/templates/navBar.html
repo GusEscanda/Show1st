@@ -4,8 +4,8 @@
     <div class="container">
         <!-- collapsed menu: home link and menu button -->
         <a class="navbar-brand text-expanded font-weight-bold d-lg-none" 
-           href="{% url opt.HOME %}">
-        {{ menu.0.optName }}
+           href="{% url page.HOME %}">
+        {{ menuOptions.0.name }}   <!-- The home page is always in the 1st position -->
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -13,11 +13,11 @@
         <!-- menu options -->
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav mx-auto">
-                {% for i in menu %}
-                    {% if i.optType == i.NAVBAR %}
-                        <li class="nav-item {% if i.optOrder == opt.optOrder %}active{% endif %} px-lg-4 myBGColor">
-                            <a class="nav-link text-expanded" href="{% url i.optApp %}{{i.optOrder}}">
-                            {{i.optName}}
+                {% for opt in menuOptions %}
+                    {% if opt.location == opt.NAVBAR %}
+                        <li class="nav-item {% if opt.id == pageId %}active{% endif %} px-lg-4 myBGColor">
+                            <a class="nav-link text-expanded" href="{% url opt.app %}{{opt.id}}">
+                            {{opt.name}}
                             </a>
                         </li>
                     {% endif %}

@@ -1,22 +1,20 @@
 from django.contrib import admin
 
-from .models import MenuOption, Style
+from .models import Style, HomePage
 
 # Register your models here.
 
-class MenuOptionAdmin(admin.ModelAdmin):
-    list_display=("optOrder", "optType", "optName", "optApp", "optParameter")
-    readonly_fields=('created','updated')
-    ordering = ['optOrder']
+class HomePageAdmin(admin.ModelAdmin):
+    list_display=("position", "app", "location", "name")
+    readonly_fields=('app','location','position','created','updated')
+    ordering = ['position']
 
 class StyleAdmin(admin.ModelAdmin):
     list_display=("styleName",)
     readonly_fields=('created','updated')
     ordering = ['styleName']
 
-admin.site.register(MenuOption, MenuOptionAdmin)
 admin.site.register(Style, StyleAdmin)
-
-
+admin.site.register(HomePage, HomePageAdmin)
 
 

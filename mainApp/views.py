@@ -1,19 +1,20 @@
 from django.shortcuts import render
 
-from .models import MenuOption, Style
+from .models import Page, Style, HomePage
 
 # Create your views here.
 
-def mainPage(request, menuOpt = ''):
-    # Obtain the site menu structure
-    menu = MenuOption.objects.all().order_by('optOrder')
-    if menuOpt:
-        opt = menu.get( optOrder = menuOpt )
-    else:
-        opt = menu[0]  # asume that the home page is the 1st one in the MenuOption table
-    # Init the dictionary to pass to the render
-    dictionary = { 'opt': opt, 'menu': menu }
-    return render( request, "mainPage.html", dictionary )
+def getContextDict(pages, appPages, pageId):
+    # Obtain the basic data that shares all the apps (menu structure, pageId, page object)
+    menuOptions = pages.objects.filter( location__in = (Page.NAVBAR,Page.FOOTER) ).order_by('position')
+    if not pageId:
+        pageId = menuOptions[0].id
+    page = appPages.objects.get( id = pageId )
+    return { 'menuOptions': menuOptions, 'pageId': pageId, 'page': page }
+
+
+def mainPage(request, pageId = ''):
+    return render( request, "mainPage.html", getContextDict(Page,HomePage,pageId) )
 
 
 def cssRenderer(request, sName, filename):

@@ -1,20 +1,19 @@
 from django.shortcuts import render
 
-from mainApp.models import MenuOption
+from mainApp.models import Page
+from mainApp.views import getContextDict
 
 from .models import InfoPage
 
 # Create your views here.
 
-def showInfo(request, menuOpt, infoPage=''):
-    # Obtain the site menu structure
-    menu = MenuOption.objects.all().order_by('optOrder')
-    opt = menu.get( optOrder = menuOpt )
-    # Init the dictionary to pass to the render
-    dictionary = { 'opt': opt, 'menu': menu }
-    inf = InfoPage.objects.get(infCode = (infoPage if infoPage else opt.optParameter) )
-    dictionary['inf'] = inf
-    return render( request, "ShowInfo.html", dictionary )
+def showInfo(request, pageId, subPageId=0):
+    if subPageId:
+        contextDict = getContextDict( Page, InfoPage, subPageId )
+        contextDict['pageId'] = pageId
+    else:
+        contextDict = getContextDict( Page, InfoPage, pageId )
+    return render( request, "ShowInfo.html", contextDict )
 
 
 

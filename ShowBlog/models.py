@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 import datetime
 
+from mainApp.models import Page
+
 # Create your models here.
 
 class PostTag(models.Model):
@@ -16,6 +18,20 @@ class PostTag(models.Model):
     def __str__(self):
         return self.tagName
 
+
+class BlogPage( Page ):
+
+    pageFilter = models.ForeignKey( PostTag, 
+                                    on_delete=models.CASCADE, 
+                                    null=True, 
+                                    blank=True, 
+                                    verbose_name='Filter Tag'
+                                   )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.app = Page.BLOG
+        self.location = Page.NAVBAR
 
 
 class Post(models.Model):
