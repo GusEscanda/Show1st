@@ -1,0 +1,158 @@
+/* Este es un reset css que me baje de un tipo que me parecio interesante.
+
+A Modern CSS Reset
+    by Andy Bell
+
+El explica en cada caso porque hizo lo que hizo y yo copie todo eso como comentarios en el codigo.
+(las opiniones vertidas desde aqui en adelante no son mias sino de Andy Bell ;) )
+
+*/
+
+
+
+
+
+
+/*
+We start with box-sizing. I just flat out reset all elements and pseudo-elements to use 
+box-sizing: border-box.
+Some people think that pseudo-elements should inherit box sizing, but I think that’s silly. 
+If you want to use a different box-sizing value, set it explicitly—at least that’s what I do, anyway. 
+I wrote about box-sizing more over on CSS From Scratch.
+*/
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+
+
+
+/*
+After box-sizing, I do a blanket reset of margin and padding, where it gets set by the browser styles. 
+This is all pretty self-explanatory, so I won’t get into it too much.
+
+I will mention the situation with lists, though. I select only lists that do have a class attribute because
+if a plain ol’ <ul> or <ol> gets used, I want it to look like a list. A lot of resets, including my previous
+ones, aggressively remove that.
+*/
+
+/* Remove default padding */
+ul[class],
+ol[class] {
+  padding: 0;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+
+
+
+
+
+
+/*
+Next up: body styles. I keep this really simple. It’s useful for the <body> to fill the viewport, even when 
+empty, so I do that by setting the min-height to 100vh. I also like smooth anchor scrolling, so I set 
+scroll-behavior: smooth, too.
+
+I only set two text styles. I set the line-height to be 1.5 because the default 1.2 just isn’t big enough 
+to have accessible, readable text. I also set text-rendering to optimizeSpeed. Using optimizeLegibility 
+makes your text look nicer, but can have serious performance issues such as 30 second loading delays, so I 
+try to avoid that now. I do sometimes add it to sections of microcopy though.
+*/
+
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+
+
+
+
+
+/*
+Just like the margin and padding rules, I only reset list-style where a list element has a class attribute.
+*
+
+/* Remove list styles on ul, ol elements with a class attribute */
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+
+
+
+
+/*
+For links without a class attribute, I set text-decoration-skip-ink: auto so that the underline renders in 
+a much more readable fashion. This could be set on links globally, but it’s caused one or two conflicts in 
+the past for me, so I keep it like this.
+*/
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+
+
+
+
+
+/*
+Good ol’ fluid image styles come next. I set images to be a block element because frankly, life is too 
+short for that weird gap you get at the bottom, and realistically, images—especially with work I do—tend to 
+behave like blocks.
+*/
+
+/* Make images easier to work with */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+
+
+
+
+
+/*
+Another thing I’ve finally been brave enough to set as default is font: inherit on input elements, which as 
+a shorthand, does exactly what it says on the tin. No more tiny (mono, in some cases) text!
+*/
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+

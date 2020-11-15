@@ -14,6 +14,7 @@ class PostTagAdmin(admin.ModelAdmin):
 
 class PostAdmin(admin.ModelAdmin):
     list_display = ("postDate", "postTitle", "tags")
+    list_filter = ('postDate', 'postTags__tagName')
     readonly_fields = ('created','updated')
     ordering = ['-postDate']
 

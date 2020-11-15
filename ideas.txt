@@ -16,6 +16,14 @@ pongo aqui algunas ideas de lo que quiero hacer...
       titulo y texto ampliado. Ordenados por fecha y opcionalmente poder categorizarlos y filtrarlos por
       fecha y/o categoria
 
+- crear usuarios de la pagina? 
+    - navegacion anonima o no-anonima con acceso a partes distintas?
+    - creacion con o sin intervencion de la empresa? Tal vez una distincion entre 'usuario' y 'cliente'
+    - posibilidad de mostrar precios distintos a anonimos/usuarios/clientes. Quiza incluso tener listas de precios por cliente
+
+- posibilidad por parte del usuario/anonimo/cliente de marcar items de interes y enviar por mail la 
+  lista de esos items a modo de pedido de presupuesto u orden de compra
+
 
 implementacion:
 
