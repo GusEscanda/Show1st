@@ -1,6 +1,7 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 
-from mainApp.models import Page
+from mainApp.models import Page, Prueba
 from mainApp.views import getContextDict
 
 from .models import ItemsPage, ItemCategory, Item
@@ -34,7 +35,14 @@ def showItems(request, pageId, addFilter=''):
     contextDict['addFilter'] = addFilter
     return render( request, "ShowItems.html", contextDict )
 
+def addToCart(request, itemId):
+    Prueba.objects.create(texto='add item '+str(itemId))
+    return render( request, "popUp.html", {} )
+    # return HttpResponse('')
 
-
+def delFromCart(request, itemId):
+    Prueba.objects.create(texto='del item '+str(itemId))
+    return render( request, "popUp.html", {} )
+    # return HttpResponse('')
 
 

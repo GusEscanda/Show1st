@@ -35,17 +35,38 @@
                     <div> 
                         {{item.itemName}}
                         <div id="itemName-{{item.id}}">
-                            <div class="cursorPointer" onclick="swapDisplay('itemName-{{item.id}}','itemDescrip-{{item.id}}', this);">( ... )</div>
+                            <div    class="cursorPointer" 
+                                    onclick="swapDisplay('itemName-{{item.id}}','itemDescrip-{{item.id}}');"
+                            >
+                                ( ... )
+                            </div>
                         </div>
                     </div>
                     <div id="itemDescrip-{{item.id}}" style="display:none" >
                         {{ item.itemDescrip | linebreaks }}
-                        <div class="cursorPointer" onclick="swapDisplay('itemName-{{item.id}}','itemDescrip-{{item.id}}', this);">( - )</div>
+                        <div    class="cursorPointer" 
+                                onclick="swapDisplay('itemName-{{item.id}}','itemDescrip-{{item.id}}');"
+                        >
+                            ( - )
+                        </div>
+                    </div>
+                    <div id="addCart-{{item.id}}" class="cursorPointer"
+                         onclick="popUp('{% url page.ITEMS %}addCart/{{item.id}}'); swapDisplay('addCart-{{item.id}}','delCart-{{item.id}}');"
+                    >
+                        <img src="{% static 'mainApp/img/ShopCartAdd.png' %}" width="30" height="30">
+                    </div>
+                    <div id="delCart-{{item.id}}" class="cursorPointer" 
+                         onclick="popUp('{% url page.ITEMS %}delCart/{{item.id}}'); swapDisplay('addCart-{{item.id}}','delCart-{{item.id}}');"
+                         style="display:none"
+                    >
+                        <img src="{% static 'mainApp/img/ShopCartDel.png' %}" width="30" height="30">
                     </div>
                     <div class="d-flex justify-content-between">
                         <div>
                             {% for cat in item.itemCats.all %}
-                                {% if cat.catName != page.pageFilter.catName %} {{cat.catName}} &nbsp; {% endif %}
+                                {% if cat.catName != page.pageFilter.catName %}
+                                    {{cat.catName}} &nbsp;
+                                {% endif %}
                             {% endfor %}
                         </div>
                         <div>

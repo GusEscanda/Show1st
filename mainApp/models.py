@@ -20,51 +20,6 @@ class Style(models.Model):
         return self.styleName
 
 
-
-#class MenuOption(models.Model):
-#    HOME    = 'HOM'
-#    INFO    = 'INF'
-#    BLOG    = 'BLG'
-#    CONTACT = 'CON'
-#    ITEMS   = 'ITM'
-#
-#    NAVBAR = 'NAVBAR'
-#    FOOTER = 'FOOTER'
-#
-#    optOrder      = models.SlugField(max_length=10, unique=True, verbose_name='Order')
-#    optName       = models.CharField(max_length=30, blank=False, verbose_name='Option Name')
-#    optType       = models.CharField( 
-#                      max_length=6, 
-#                      choices=[ (NAVBAR, 'NavBar'), 
-#                                (FOOTER, 'Footer') ], 
-#                      default=NAVBAR,
-#                      verbose_name='Option Type'
-#                    )
-#    optApp        = models.CharField( 
-#                       max_length=3, 
-#                       choices=[ (HOME,    'Home'), 
-#                                 (INFO,    'ShowInfo'), 
-#                                 (BLOG,    'ShowBlog'), 
-#                                 (CONTACT, 'ShowContact'),
-#                                 (ITEMS,   'ShowItems') ], 
-#                       default=INFO,
-#                       verbose_name='Option App'
-#                     )
-#    optParameter  = models.CharField(max_length=120, blank=True, verbose_name='Aditional Parameter')
-#    optStyle      = models.ForeignKey(Style, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Style')
-#    optMainTitle  = models.CharField(max_length=60, blank=False, verbose_name='Main title')
-#    optImageTitle = models.ImageField(upload_to='mainApp', null=True, blank=True, verbose_name='Image title')
-#    created       = models.DateTimeField(auto_now_add=True)
-#    updated       = models.DateTimeField(auto_now=True)
-#    
-#    class Meta:
-#        verbose_name='menu option'
-#        verbose_name_plural='menu options'
-#    
-#    def __str__(self):
-#        return self.optOrder + ' ' + self.optName + ( ' - ' + self.optParameter if self.optParameter else '' )
-
-
 class Page(models.Model):
 
     HOME    = 'HOM'
@@ -116,5 +71,11 @@ class HomePage( Page ):
         self.app = Page.HOME
         self.location = Page.NAVBAR
         self.position = 0
+
+class Prueba( models.Model):
+    texto = models.CharField(max_length=100, blank=True, null=True)
+
+    def __str__(self):
+        return '{0} - {1}'.format(self.id, self.texto)
 
 

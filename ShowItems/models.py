@@ -54,10 +54,16 @@ class Item(models.Model):
 
 
     def __str__(self):
-        return str(self.itemCode) + ' ' + self.itemName + '  (' + self. strCats() + ')'
+        return str(self.itemCode) + ' ' + self.itemName + '  (' + self.strCats() + ')'
 
 
+class ShoppingCart( models.Model ):
+    cartId  = models.CharField(max_length=100, unique=True)
+    items   = models.ManyToManyField(Item)
+    updated = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return '{0} ( {1} )'.format(self.cartId, str(self.items))
 
 
 

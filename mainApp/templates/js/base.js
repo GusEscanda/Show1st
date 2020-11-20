@@ -8,10 +8,20 @@ Swaps the style.display value of the two elements received.
 */
 
 const swapDisplay = (_elementIdA, _elementIdB) => {
-  const elementA = document.getElementById(_elementIdA)
-  const elementB = document.getElementById(_elementIdB)
-  const displayA = elementA.style.display
-  const displayB = elementB.style.display
-  elementA.style.display = displayB
-  elementB.style.display = displayA
+    const elementA = document.getElementById(_elementIdA)
+    const elementB = document.getElementById(_elementIdB)
+    const displayA = elementA.style.display
+    const displayB = elementB.style.display
+    elementA.style.display = displayB
+    elementB.style.display = displayA
 }
+
+
+const popUp = (_url) => {
+    popUpWindow = window.open( _url,
+                               'popUpWindow',
+                               'height=10, width=10, left=10, top=10, resizable=no, scrollbars=no, toolbar=no, menubar=no, location=no, directories=no, status=no'
+               );
+    // popUpWindow.close()
+}
+
