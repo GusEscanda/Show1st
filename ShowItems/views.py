@@ -1,17 +1,32 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from mainApp.models import Page, Prueba
+from mainApp.models import Page
 from mainApp.views import getContextDict
 
-from .models import ItemsPage, ItemCategory, Item
+from .models import ItemsPage, ItemCategory, Item, ShoppingCart
+
+import uuid     # module that handles unique Ids
+from datetime import timedelta
+from django.utils import timezone
 
 # Create your views here.
 
+def getCart(session):
+    # delete the expired sessions and shopping carts. TODO: consider to put this in a cron job
+    session.clear_expired()
+    ShoppingCart.objects.filter(updated__lte = timezone.now() - timedelta(days=15)).delete()
+    # if there is no cart already, create a new one
+    if 'cartId' not in session:
+        session['cartId'] = str( uuid.uuid4() )
+    cart, created = ShoppingCart.objects.get_or_create(cartId=session['cartId'])
+    return cart
+
+
 def showItems(request, pageId, addFilter=''):
-    contextDict = getContextDict( Page, ItemsPage, pageId )
+    context = getContextDict( Page, ItemsPage, pageId )
     # Obtain the items, optionally filtered by pageFilter
-    pageFilter = contextDict['page'].pageFilter
+    pageFilter = context['page'].pageFilter
     if pageFilter:
         myItems = Item.objects.filter( itemCats = pageFilter ).order_by('itemCode')
         catFiltered = pageFilter.catName
@@ -30,19 +45,26 @@ def showItems(request, pageId, addFilter=''):
         filter = [ f.strip() for f in filter.split(',') ] # convert the string into a list
         myItems = myItems.filter( itemCats__catName__in = filter ).order_by('itemCode')
     # Complete the context dictionary
-    contextDict['items'] = myItems
-    contextDict['cats'] = allCats
-    contextDict['addFilter'] = addFilter
-    return render( request, "ShowItems.html", contextDict )
+    context['items'] = myItems
+    context['cats'] = allCats
+    context['addFilter'] = addFilter
+    context['cart'] = getCart(request.session)
+    return render( request, "ShowItems.html", context )
 
 def addToCart(request, itemId):
-    Prueba.objects.create(texto='add item '+str(itemId))
+    cart = ShoppingCart.objects.get(cartId=request.session['cartId'])
+    item = Item.objects.get(id=itemId)
+    if item not in cart.items.all():
+        cart.items.add(item)
+        cart.updated = timezone.now()
     return render( request, "popUp.html", {} )
-    # return HttpResponse('')
 
 def delFromCart(request, itemId):
-    Prueba.objects.create(texto='del item '+str(itemId))
+    cart = ShoppingCart.objects.get(cartId=request.session['cartId'])
+    item = Item.objects.get(id=itemId)
+    if item in cart.items.all():
+        cart.items.remove(item)
+        cart.updated = timezone.now()
     return render( request, "popUp.html", {} )
-    # return HttpResponse('')
 
 

@@ -22,6 +22,7 @@
     </div>
 </section>
 
+<h3>{{request.session.cartId}}</h3>
 
 <!-- Show the items -->
 <section>
@@ -52,12 +53,17 @@
                     </div>
                     <div id="addCart-{{item.id}}" class="cursorPointer"
                          onclick="popUp('{% url page.ITEMS %}addCart/{{item.id}}'); swapDisplay('addCart-{{item.id}}','delCart-{{item.id}}');"
+                         {% if item in cart.items.all %}
+                             style="display:none"
+                         {% endif %}
                     >
                         <img src="{% static 'mainApp/img/ShopCartAdd.png' %}" width="30" height="30">
                     </div>
                     <div id="delCart-{{item.id}}" class="cursorPointer" 
                          onclick="popUp('{% url page.ITEMS %}delCart/{{item.id}}'); swapDisplay('addCart-{{item.id}}','delCart-{{item.id}}');"
-                         style="display:none"
+                         {% if item not in cart.items.all %}
+                             style="display:none"
+                         {% endif %}
                     >
                         <img src="{% static 'mainApp/img/ShopCartDel.png' %}" width="30" height="30">
                     </div>

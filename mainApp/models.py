@@ -72,10 +72,3 @@ class HomePage( Page ):
         self.location = Page.NAVBAR
         self.position = 0
 
-class Prueba( models.Model):
-    texto = models.CharField(max_length=100, blank=True, null=True)
-
-    def __str__(self):
-        return '{0} - {1}'.format(self.id, self.texto)
-
-
