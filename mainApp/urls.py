@@ -7,8 +7,8 @@ from django.conf import settings            # para incluir en urlpatterns las ca
 from django.conf.urls.static import static  # para incluir en urlpatterns las carpetas con las imagenes
 
 urlpatterns = [
-    path('',                                        views.mainPage,      name = Page.HOME),
-    path('<int:pageId>',                            views.mainPage,      name = Page.HOME),
+    path('',                                        views.homePage,      name = Page.HOME),
+    path('<int:pageId>',                            views.homePage,      name = Page.HOME),
     path('css/<str:sName>/<str:filename>.css',      views.cssRenderer),
     path('js/<str:filename>.js',                    views.jsRenderer),
 ]

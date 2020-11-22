@@ -13,8 +13,8 @@ def getContextDict(pages, appPages, pageId):
     return { 'menuOptions': menuOptions, 'pageId': pageId, 'page': page }
 
 
-def mainPage(request, pageId = ''):
-    return render( request, "mainPage.html", getContextDict(Page,HomePage,pageId) )
+def homePage(request, pageId = ''):
+    return render( request, "homePage.html", getContextDict(Page,HomePage,pageId) )
 
 
 def cssRenderer(request, sName, filename):

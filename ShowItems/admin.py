@@ -20,7 +20,7 @@ class ItemAdmin(admin.ModelAdmin):
     def categories(self, obj):
         return obj.strCats()
 
+admin.site.register(ItemsPage, ItemsPageAdmin)
 admin.site.register(ItemCategory, ItemCategoryAdmin)
 admin.site.register(Item, ItemAdmin)
-admin.site.register(ItemsPage, ItemsPageAdmin)
 

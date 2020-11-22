@@ -49,6 +49,7 @@ class Page(models.Model):
                         verbose_name='Location'
                     )
     position      = models.PositiveIntegerField(unique=True, verbose_name='Position')
+    homeImage     = models.ImageField(upload_to='mainApp', null=True, blank=True, verbose_name='Home Page Image')
     name          = models.CharField(max_length=30, blank=False, verbose_name='Name')
     mainTitle     = models.CharField(max_length=60, blank=False, verbose_name='Main title')
     imageTitle    = models.ImageField(upload_to='mainApp', null=True, blank=True, verbose_name='Image title')

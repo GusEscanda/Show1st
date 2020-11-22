@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+{% for m in menuOptions %}
+    <div class="container">
+        <div class="row justify-content-center">
+
+        {% if m.homeImage %}
+            <div class="col-md-3 infoBlock">
+                <img class="imageBlock" src="{{m.homeImage.url}}" alt="{{m.name}}">
+            </div>
+        {% endif %}
+
+        </div>
+    </div>
+{% endfor %}
+
+{% endblock %}
+

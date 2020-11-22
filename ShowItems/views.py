@@ -12,6 +12,7 @@ from django.utils import timezone
 
 # Create your views here.
 
+
 def getCart(session):
     # delete the expired sessions and shopping carts. TODO: consider to put this in a cron job
     session.clear_expired()
@@ -51,6 +52,7 @@ def showItems(request, pageId, addFilter=''):
     context['cart'] = getCart(request.session)
     return render( request, "ShowItems.html", context )
 
+
 def addToCart(request, itemId):
     cart = ShoppingCart.objects.get(cartId=request.session['cartId'])
     item = Item.objects.get(id=itemId)
@@ -58,6 +60,7 @@ def addToCart(request, itemId):
         cart.items.add(item)
         cart.updated = timezone.now()
     return render( request, "popUp.html", {} )
+
 
 def delFromCart(request, itemId):
     cart = ShoppingCart.objects.get(cartId=request.session['cartId'])
