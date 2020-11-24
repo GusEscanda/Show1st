@@ -53,21 +53,18 @@ def showItems(request, pageId, addFilter=''):
     return render( request, "ShowItems.html", context )
 
 
-def addToCart(request, itemId):
-    cart = ShoppingCart.objects.get(cartId=request.session['cartId'])
-    item = Item.objects.get(id=itemId)
-    if item not in cart.items.all():
-        cart.items.add(item)
-        cart.updated = timezone.now()
-    return render( request, "popUp.html", {} )
+def updateCart(request):
+    cart = ShoppingCart.objects.get( cartId = request.session['cartId'] )
+    item = Item.objects.get( id = request.POST['itemId'] )
 
-
-def delFromCart(request, itemId):
-    cart = ShoppingCart.objects.get(cartId=request.session['cartId'])
-    item = Item.objects.get(id=itemId)
     if item in cart.items.all():
         cart.items.remove(item)
         cart.updated = timezone.now()
-    return render( request, "popUp.html", {} )
+        return HttpResponse('Item removed')
+    else:
+        cart.items.add(item)
+        cart.updated = timezone.now()
+        return HttpResponse('Item added')
 
+#    return render( request, "popUp.html", {} )
 

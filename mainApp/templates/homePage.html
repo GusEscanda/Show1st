@@ -4,13 +4,15 @@
 
 {% block content %}
 
-{% for m in menuOptions %}
+{% for opt in menuOptions %}
     <div class="container">
         <div class="row justify-content-center">
 
-        {% if m.homeImage %}
+        {% if opt.homeImage %}
             <div class="col-md-3 infoBlock">
-                <img class="imageBlock" src="{{m.homeImage.url}}" alt="{{m.name}}">
+                <a href="{% url opt.app %}{{opt.id}}">
+                    <img class="imageBlock" src="{{opt.homeImage.url}}" alt="{{opt.name}}">
+                </a>
             </div>
         {% endif %}
 

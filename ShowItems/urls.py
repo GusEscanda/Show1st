@@ -7,8 +7,7 @@ urlpatterns = [
     path('',                                        views.showItems,   name = Page.ITEMS),
     path('<int:pageId>',                            views.showItems,   name = Page.ITEMS),
     path('addFilter/<int:pageId>/<str:addFilter>',  views.showItems,   name = Page.ITEMS),
-    path('addCart/<int:itemId>',                    views.addToCart,   name = Page.ITEMS),
-    path('delCart/<int:itemId>',                    views.delFromCart, name = Page.ITEMS),
+    path('updateCart',                              views.updateCart),
 ]
 
 

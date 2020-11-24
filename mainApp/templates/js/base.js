@@ -25,3 +25,13 @@ const popUp = (_url) => {
     // popUpWindow.close()
 }
 
+function targetPopUp(form) {
+    window.open(
+        '',
+        'formPopUp',
+        'height=10, width=10, left=10, top=10, resizable=no, scrollbars=no, toolbar=no, menubar=no, location=no, directories=no, status=no'
+    )
+    form.target = 'formPopUp'
+}
+
+

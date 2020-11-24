@@ -1,4 +1,5 @@
 from django.db import models
+from tinymce import models as tmceModels
 
 from mainApp.models import Page
 
@@ -19,12 +20,15 @@ class ItemCategory(models.Model):
 
 class ItemsPage( Page ):
 
-    pageFilter = models.ForeignKey( ItemCategory, 
-                                    on_delete=models.CASCADE, 
-                                    null=True, 
-                                    blank=True, 
-                                    verbose_name='Filter Category'
-                                   )
+    pageFilter      = models.ForeignKey( ItemCategory, 
+                                         on_delete=models.CASCADE, 
+                                         null=True, 
+                                         blank=True, 
+                                         verbose_name='Filter Category'
+                                        )
+    headerText      = tmceModels.HTMLField( blank=True, null=True, verbose_name='Previous text' )
+    footText        = tmceModels.HTMLField( blank=True, null=True, verbose_name='Posterior text')
+    enableShopCart  = models.BooleanField( default=False, verbose_name='Enable Shopping Cart')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

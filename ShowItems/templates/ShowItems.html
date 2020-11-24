@@ -22,7 +22,13 @@
     </div>
 </section>
 
-<h3>{{request.session.cartId}}</h3>
+<iframe name="cartUpdateResult" id="cartUpdateResult" style="display:none"></iframe>
+
+{% if page.headerText %}
+    <div class="infoBlock">
+        {{ page.headerText | safe }}
+    </div>
+{% endif %}
 
 <!-- Show the items -->
 <section>
@@ -30,9 +36,11 @@
         <div class="row justify-content-center">
             {% for item in items %}
                 <div class="col-md-3 infoBlock">
+
                     {% if item.itemImage %}
                         <img class="imageBlock" src="{{item.itemThumb.url}}" alt="{{item.itemName}}">
                     {% endif %}
+
                     <div> 
                         {{item.itemName}}
                         <div id="itemName-{{item.id}}">
@@ -51,22 +59,27 @@
                             ( - )
                         </div>
                     </div>
-                    <div id="addCart-{{item.id}}" class="cursorPointer"
-                         onclick="popUp('{% url page.ITEMS %}addCart/{{item.id}}'); swapDisplay('addCart-{{item.id}}','delCart-{{item.id}}');"
-                         {% if item in cart.items.all %}
-                             style="display:none"
-                         {% endif %}
-                    >
-                        <img src="{% static 'mainApp/img/ShopCartAdd.png' %}" width="30" height="30">
-                    </div>
-                    <div id="delCart-{{item.id}}" class="cursorPointer" 
-                         onclick="popUp('{% url page.ITEMS %}delCart/{{item.id}}'); swapDisplay('addCart-{{item.id}}','delCart-{{item.id}}');"
-                         {% if item not in cart.items.all %}
-                             style="display:none"
-                         {% endif %}
-                    >
-                        <img src="{% static 'mainApp/img/ShopCartDel.png' %}" width="30" height="30">
-                    </div>
+
+                    {% if page.enableShopCart %}
+<!--                <form action="{% url page.ITEMS %}updateCart" method="post" onsubmit='targetPopUp(this);'> -->
+                    <form action="{% url page.ITEMS %}updateCart" method="post" target="cartUpdateResult">
+                        {% csrf_token %}
+                        <input type="hidden" name="itemId" value="{{item.id}}">
+                        <input type="image" alt="Submit" 
+                               src="{% static 'mainApp/img/ShopCartAdd.png' %}" width="30" height="30"
+                               id="addCart-{{item.id}}"
+                               {% if item in cart.items.all %} style="display:none" {% endif %}
+                               onclick="swapDisplay('addCart-{{item.id}}','delCart-{{item.id}}');"
+                        >
+                        <input type="image" alt="Submit" 
+                               src="{% static 'mainApp/img/ShopCartDel.png' %}" width="30" height="30"
+                               id="delCart-{{item.id}}"
+                               {% if item not in cart.items.all %} style="display:none" {% endif %}
+                               onclick="swapDisplay('addCart-{{item.id}}','delCart-{{item.id}}');"
+                        >
+                    </form>
+                    {% endif %}
+
                     <div class="d-flex justify-content-between">
                         <div>
                             {% for cat in item.itemCats.all %}
@@ -79,11 +92,18 @@
                             {{item.itemCode}}
                         </div>
                     </div>
+
                 </div>
             {% endfor %}
         </div>
     </div>
 </section>
+
+{% if page.footText %}
+    <div class="infoBlock">
+        {{ page.footText | safe }}
+    </div>
+{% endif %}
 
 {% endblock %}
 

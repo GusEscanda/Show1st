@@ -4,9 +4,47 @@
 
 {% block content %}
 
-<h2>ShowContact</h2>
-<h2>ShowContact</h2>
-<h2>ShowContact</h2>
+{% if page.text_1 %}
+    <div class="infoBlock">
+        {{ page.text_1 | safe }}
+    </div>
+{% endif %}
+
+{% if page.enableShopCart %}
+    <form action="" method="post">
+        {{ form.as_p }}
+    </form>
+{% endif %}
+
+{% if page.text_2 %}
+    <div class="infoBlock">
+        {{ page.text_2 | safe }}
+    </div>
+{% endif %}
+
+{% if channels %}
+    <ul>
+        {% for channel in channels %}
+            <li>
+                {% if channel.icon %}
+                    <img class="imageBlock" src="{{channel.icon.url}}" alt="{{channel.name}}">
+                {% else %}
+                    <div>{{channel.name}}</div>
+                {% endif %}
+            </li>
+            <li>
+                <div>{{channel.info}}</div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% if page.text_3 %}
+    <div class="infoBlock">
+        {{ page.text_3 | safe }}
+    </div>
+{% endif %}
+
 
 {% endblock %}
 
