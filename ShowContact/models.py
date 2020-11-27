@@ -16,11 +16,26 @@ class ContactPage( Page ):
         self.app = Page.CONTACT
         self.location = Page.NAVBAR
 
+
+class EmailHostConfig( models.Model ):
+    configId           = models.PositiveIntegerField(default = 1, unique=True)
+    emailHost          = models.CharField(max_length = 100, default = '', blank = True)
+    emailHostUser      = models.CharField(max_length = 100, default = '', blank = True)
+    emailHostPassword  = models.CharField(max_length = 50, default = '', blank = True)
+    emailPort          = models.PositiveIntegerField(default = 587, blank = True)
+    emailUseTLS        = models.BooleanField()
+    emailUseSSL        = models.BooleanField()
+
+
 class SubjectOption( models.Model ):
     subject = models.CharField(max_length=100, unique=True, verbose_name='Subject')
 
     def __str__(self):
         return self.subject
+
+    class Meta:
+        verbose_name='Mail subject'
+        verbose_name_plural='Mail subjects'
 
 
 class MailTo( models.Model ):
@@ -28,11 +43,32 @@ class MailTo( models.Model ):
     
     def __str__(self):
         return self.address
+
+    class Meta:
+        verbose_name='Mail recipient'
+        verbose_name_plural='Mail recipients'
     
 
-class ContactChannel( models.Model ):
-    order = models.SlugField(max_length=10, unique=True, verbose_name='Order')
-    name  = models.CharField(max_length=20, verbose_name='Contact channel')
-    icon  = models.ImageField(upload_to='ShowContact', null=True, blank=True, verbose_name='Icon')
-    info  = models.CharField(max_length=50, verbose_name='Contact info')
+class SocialMediaOption( models.Model ):
+    code = models.CharField(max_length=50, unique=True, verbose_name='Social media code')
 
+    def __str__(self):
+        return self.code
+    
+    class Meta:
+        verbose_name='Social media option'
+        verbose_name_plural='Social media options'
+
+
+class SocialMedia( models.Model ):
+    order       = models.SlugField(max_length=10, unique=True, verbose_name='Order')
+    socialMedia = models.ForeignKey(SocialMediaOption, on_delete=models.CASCADE, verbose_name='Social media')
+    profileName = models.CharField(max_length=50, verbose_name='Profile name')
+    profileLink = models.URLField(verbose_name='Profile link')
+
+    def __str__(self):
+        return '{} - {} {} - {}'.format(self.order, self.socialMedia.code, self.profileName, self.profileLink)
+
+    class Meta:
+        verbose_name="Company's social media"
+        verbose_name_plural="Company's social media"

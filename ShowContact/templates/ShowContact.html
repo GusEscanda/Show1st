@@ -10,33 +10,50 @@
     </div>
 {% endif %}
 
-{% if page.enableShopCart %}
-    <form action="" method="post">
-        {{ form.as_p }}
+
+<!--  if emailConfigurado    -->
+
+    <form action="" method="post"> {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="fieldWrapper">
+            {{ form.sender.errors }} {{ form.sender.label_tag }} {{ form.sender }}
+        </div>
+        <div class="fieldWrapper">
+            {{ form.ccMyself.errors }} {{ form.ccMyself.label_tag }} {{ form.ccMyself }}
+        </div>
+        <div class="fieldWrapper">
+            {{ form.mailTo.errors }} {{ form.mailTo.label_tag }} {{ form.mailTo }}
+        </div>
+        <div class="fieldWrapper">
+            {{ form.subject.errors }} {{ form.subject.label_tag }} {{ form.subject }}
+        </div>
+        <div class="fieldWrapper">
+            {{ form.message.errors }} {{ form.message.label_tag }} {{ form.message }}
+        </div>
+        {% if page.enableShopCart %}
+            {% if page.text_2 %}
+                <div class="infoBlock">
+                    {{ page.text_2 | safe }}
+                </div>
+            {% endif %}
+            <div class="fieldWrapper">
+                {{ form.attachSC.errors }} {{ form.attachSC.label_tag }} {{ form.attachSC }}
+            </div>
+            <h2>Mostrar aqui el shopping cart y permitir introducir cantidades</h2>
+        {% endif %}
+        <input type="submit" value="Send">
     </form>
-{% endif %}
 
-{% if page.text_2 %}
-    <div class="infoBlock">
-        {{ page.text_2 | safe }}
-    </div>
-{% endif %}
+<!--    endif    -->
 
-{% if channels %}
-    <ul>
-        {% for channel in channels %}
-            <li>
-                {% if channel.icon %}
-                    <img class="imageBlock" src="{{channel.icon.url}}" alt="{{channel.name}}">
-                {% else %}
-                    <div>{{channel.name}}</div>
-                {% endif %}
-            </li>
-            <li>
-                <div>{{channel.info}}</div>
-            </li>
+{% if smedia %}
+    <div>
+        {% for sm in smedia %}
+            <a class="fa fa-{{sm.socialMedia.code}}" href="{{sm.profileLink}}" target="_blank"></a>
+            <a class="myLink" href="{{sm.profileLink}}" target="_blank">{{sm.profileName}}</a>
+            &nbsp;&nbsp;&nbsp;
         {% endfor %}
-    </ul>
+    </div>
 {% endif %}
 
 {% if page.text_3 %}

@@ -88,3 +88,10 @@ body {
       padding: 15px 15px;
 }
 
+.socialMedialList {
+      background-color: var(--styleTextBGColor,darkblue);
+}
+
+.errorMessage {
+      background-color: red;
+}

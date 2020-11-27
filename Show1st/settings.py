@@ -133,3 +133,12 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+
+# I don't use these settings, I prefer to store this data in a model
+
+# EMAIL_HOST="smtp.gmail.com"
+# EMAIL_HOST_USER="foo@gmail.com"
+# EMAIL_HOST_PASSWORD="*************"
+# EMAIL_PORT=587
+# EMAIL_USE_TLS=True
+# EMAIL_USE_SSL=False

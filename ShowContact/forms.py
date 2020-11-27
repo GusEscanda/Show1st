@@ -16,3 +16,4 @@ class ContactForm(forms.Form):
     message     = forms.CharField(label='Message', widget=forms.Textarea)
     attachSC    = forms.BooleanField(label='Attach Shopping Cart', initial=True, required=False)
 
+    
