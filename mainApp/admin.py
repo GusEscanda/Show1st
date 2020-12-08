@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Style, HomePage
+from .models import Style, HomePage, SiteSettings
 
 # Register your models here.
 
@@ -14,6 +14,7 @@ class StyleAdmin(admin.ModelAdmin):
     readonly_fields=('created','updated')
     ordering = ['styleName']
 
+admin.site.register(SiteSettings)
 admin.site.register(Style, StyleAdmin)
 admin.site.register(HomePage, HomePageAdmin)
 

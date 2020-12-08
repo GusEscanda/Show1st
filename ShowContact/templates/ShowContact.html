@@ -11,7 +11,7 @@
 {% endif %}
 
 
-<!--  if emailConfigurado    -->
+{% if settings.emailConfigured %}
 
     <form action="" method="post"> {% csrf_token %}
         {{ form.non_field_errors }}
@@ -38,15 +38,24 @@
             {% endif %}
             <div class="fieldWrapper">
                 {{ form.attachSC.errors }} {{ form.attachSC.label_tag }} {{ form.attachSC }}
+                {{ form.clearSC.errors }}  {{ form.clearSC.label_tag }}  {{ form.clearSC }}
             </div>
             <h2>Mostrar aqui el shopping cart y permitir introducir cantidades</h2>
+            {{ formset.management_form }}
+            {% for row in formset %}
+                <div class="fieldWrapper">
+                    {{ row.code.errors }} {{ row.code }}
+                    {{ row.name.errors }} {{ row.name }}
+                    {{ row.quantity.errors }} {{ row.quantity }}
+                </div>
+            {% endfor %}
         {% endif %}
         <input type="submit" value="Send">
     </form>
 
-<!--    endif    -->
+{% endif %}
 
-{% if smedia %}
+{% if page.showSocialMedia and smedia %}
     <div>
         {% for sm in smedia %}
             <a class="fa fa-{{sm.socialMedia.code}}" href="{{sm.profileLink}}" target="_blank"></a>

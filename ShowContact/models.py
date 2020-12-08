@@ -7,6 +7,7 @@ from mainApp.models import Page
 
 class ContactPage( Page ):
     enableShopCart  = models.BooleanField( default=False, verbose_name='Enable Shopping Cart')
+    showSocialMedia = models.BooleanField( default=False, verbose_name='Show Social Media')
     text_1          = tmceModels.HTMLField( blank=True, null=True, verbose_name='Text 1' )
     text_2          = tmceModels.HTMLField( blank=True, null=True, verbose_name='Text 2' )
     text_3          = tmceModels.HTMLField( blank=True, null=True, verbose_name='Text 3' )
@@ -14,17 +15,6 @@ class ContactPage( Page ):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.app = Page.CONTACT
-        self.location = Page.NAVBAR
-
-
-class EmailHostConfig( models.Model ):
-    configId           = models.PositiveIntegerField(default = 1, unique=True)
-    emailHost          = models.CharField(max_length = 100, default = '', blank = True)
-    emailHostUser      = models.CharField(max_length = 100, default = '', blank = True)
-    emailHostPassword  = models.CharField(max_length = 50, default = '', blank = True)
-    emailPort          = models.PositiveIntegerField(default = 587, blank = True)
-    emailUseTLS        = models.BooleanField()
-    emailUseSSL        = models.BooleanField()
 
 
 class SubjectOption( models.Model ):

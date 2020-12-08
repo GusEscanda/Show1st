@@ -1,0 +1,8 @@
+{% load static %}
+
+<form action="{% url page.ITEMS %}resetCart" method="post" target="cartUpdateResult">{% csrf_token %}
+    <input type="image" alt="Submit" 
+        src="{% static 'mainApp/img/ShopCartDel.png' %}" width="30" height="30"
+        onclick="location.reload();"
+    >
+</form>

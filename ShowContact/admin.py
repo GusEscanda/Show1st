@@ -1,12 +1,12 @@
 from django.contrib import admin
 
-from .models import ContactPage, EmailHostConfig, SubjectOption, MailTo, SocialMediaOption, SocialMedia
+from .models import ContactPage, SubjectOption, MailTo, SocialMediaOption, SocialMedia
 
 # Register your models here.
 
 class ContactPageAdmin(admin.ModelAdmin):
     list_display=("position", "app", "location", "name")
-    readonly_fields=('app','location','created','updated')
+    readonly_fields=('app','created','updated')
     ordering = ['position']
 
 class EmailHostConfigAdmin(admin.ModelAdmin):
@@ -30,7 +30,6 @@ class SocialMediaAdmin(admin.ModelAdmin):
     ordering = ['order']
 
 admin.site.register(ContactPage, ContactPageAdmin)
-admin.site.register(EmailHostConfig, EmailHostConfigAdmin)
 admin.site.register(SubjectOption, SubjectOptionAdmin)
 admin.site.register(MailTo, MailToAdmin)
 admin.site.register(SocialMediaOption, SocialMediaOptionAdmin)

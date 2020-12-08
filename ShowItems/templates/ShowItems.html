@@ -30,6 +30,17 @@
     </div>
 {% endif %}
 
+<!-- Show the shoping cart controls -->
+{% if page.enableShopCart and page.sendCartPage %}
+    <div class="cursorPointer">
+        <a href="{% url page.sendCartPage.app %}{{page.sendCartPage.id}}{% url page.app %}{{page.id}}">
+            <img src="{% static 'mainApp/img/ShopCartConfirm.png' %}" width="30" height="30" alt="Send shopping cart">
+        </a>
+        ( <span id="itemsQty">{{ cart.itemsQty }}</span> )
+        {% include "resetCart.html" %}
+    </div>
+{% endif %}
+
 <!-- Show the items -->
 <section>
     <div class="container">
@@ -69,13 +80,13 @@
                                src="{% static 'mainApp/img/ShopCartAdd.png' %}" width="30" height="30"
                                id="addCart-{{item.id}}"
                                {% if item in cart.items.all %} style="display:none" {% endif %}
-                               onclick="swapDisplay('addCart-{{item.id}}','delCart-{{item.id}}');"
+                               onclick="add2TextId('itemsQty',1);swapDisplay('addCart-{{item.id}}','delCart-{{item.id}}');"
                         >
                         <input type="image" alt="Submit" 
                                src="{% static 'mainApp/img/ShopCartDel.png' %}" width="30" height="30"
                                id="delCart-{{item.id}}"
                                {% if item not in cart.items.all %} style="display:none" {% endif %}
-                               onclick="swapDisplay('addCart-{{item.id}}','delCart-{{item.id}}');"
+                               onclick="add2TextId('itemsQty',-1);swapDisplay('addCart-{{item.id}}','delCart-{{item.id}}');"
                         >
                     </form>
                     {% endif %}

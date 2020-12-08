@@ -34,4 +34,8 @@ function targetPopUp(form) {
     form.target = 'formPopUp'
 }
 
+function add2TextId(id, num) {
+  const elem = document.getElementById(id)
+  elem.innerText = parseInt( elem.innerText ) + num
+}
 

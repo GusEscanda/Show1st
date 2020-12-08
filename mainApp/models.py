@@ -2,6 +2,40 @@ from django.db import models
 
 # Create your models here.
 
+class SingletonModel(models.Model):
+
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs):
+        self.pk = 1
+        super(SingletonModel, self).save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        pass
+
+    @classmethod
+    def load(cls):
+        obj, created = cls.objects.get_or_create(pk=1)
+        return obj
+
+class SiteSettings( SingletonModel ):
+    emailHost          = models.CharField(max_length = 100, default = '', blank = True, verbose_name='Email Host')
+    emailHostUser      = models.CharField(max_length = 100, default = '', blank = True, verbose_name='Email Host User')
+    emailHostPassword  = models.CharField(max_length = 50, default = '', blank = True, verbose_name='Email Host Password')
+    emailPort          = models.PositiveIntegerField(default = 587, blank = True, verbose_name='Email Port')
+    emailUseTLS        = models.BooleanField(default=False, verbose_name='Email Use TLS')
+    emailUseSSL        = models.BooleanField(default=False, verbose_name='Email Use SSL')
+
+    class Meta:
+        verbose_name='Site Settings'
+        verbose_name_plural='Site Settings'
+
+    def emailConfigured(self):
+        return self.emailHost != '' and self.emailHostUser != ''
+
+
+
 class Style(models.Model):
     styleName         = models.SlugField(max_length=20, blank=False, unique=True, verbose_name='Style Name')
     styleBGColor      = models.CharField(max_length=120, blank=True, verbose_name='Background color')

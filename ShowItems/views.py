@@ -4,25 +4,13 @@ from django.http import HttpResponse
 from mainApp.models import Page
 from mainApp.views import getContextDict
 
-from .models import ItemsPage, ItemCategory, Item, ShoppingCart
+from .models import ItemsPage, ItemCategory, Item, ShoppingCart, getCart
 
 import uuid     # module that handles unique Ids
 from datetime import timedelta
 from django.utils import timezone
 
 # Create your views here.
-
-
-def getCart(session):
-    # delete the expired sessions and shopping carts. TODO: consider to put this in a cron job
-    session.clear_expired()
-    ShoppingCart.objects.filter(updated__lte = timezone.now() - timedelta(days=15)).delete()
-    # if there is no cart already, create a new one
-    if 'cartId' not in session:
-        session['cartId'] = str( uuid.uuid4() )
-    cart, created = ShoppingCart.objects.get_or_create(cartId=session['cartId'])
-    return cart
-
 
 def showItems(request, pageId, addFilter=''):
     context = getContextDict( Page, ItemsPage, pageId )
@@ -56,15 +44,16 @@ def showItems(request, pageId, addFilter=''):
 def updateCart(request):
     cart = ShoppingCart.objects.get( cartId = request.session['cartId'] )
     item = Item.objects.get( id = request.POST['itemId'] )
-
     if item in cart.items.all():
-        cart.items.remove(item)
-        cart.updated = timezone.now()
+        cart.delItem(item)
         return HttpResponse('Item removed')
     else:
-        cart.items.add(item)
-        cart.updated = timezone.now()
+        cart.addItem(item)
         return HttpResponse('Item added')
 
-#    return render( request, "popUp.html", {} )
+def resetCart(request):
+    cart = ShoppingCart.objects.get( cartId = request.session['cartId'] )
+    cart.reset()
+    return HttpResponse('Item reset')
+
 

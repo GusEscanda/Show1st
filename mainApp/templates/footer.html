@@ -6,7 +6,7 @@
         <p class="m-0 mbt">
             {% for opt in menuOptions %}
                 {% if opt.location == opt.FOOTER %}
-                    <a class="myLink myFooter" href="{% url opt.INFO %}{{opt.id}}">{{opt.name}}</a> ·
+                    <a class="myLink myFooter" href="{% url opt.app %}{{opt.id}}">{{opt.name}}</a> ·
                 {% endif %}
             {% endfor %}
         </p>
