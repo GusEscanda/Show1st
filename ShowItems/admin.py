@@ -13,9 +13,9 @@ class ItemCategoryAdmin(admin.ModelAdmin):
     readonly_fields=('created','updated')
 
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ("itemCode", "itemName", "categories")
+    list_display = ("code", "name", "categories")
     readonly_fields = ('created','updated')
-    ordering = ['itemCode']
+    ordering = ['code']
 
     def categories(self, obj):
         return obj.strCats()

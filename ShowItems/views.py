@@ -17,25 +17,25 @@ def showItems(request, pageId, addFilter=''):
     # Obtain the items, optionally filtered by pageFilter
     pageFilter = context['page'].pageFilter
     if pageFilter:
-        myItems = Item.objects.filter( itemCats = pageFilter ).order_by('itemCode')
-        catFiltered = pageFilter.catName
+        myItems     = pageFilter.items.all().order_by('code')
+        catFiltered = pageFilter.name
     else:
-        myItems = Item.objects.all().order_by('itemCode')
+        myItems     = Item.objects.all().order_by('code')
         catFiltered = ''
     # Obtain a list (without duplicates) of ALL the tags that appear in any of the MENU FILTERED items
     allCats = []
     for item in myItems:
-        for cat in item.itemCats.all():
-            if cat.catName not in allCats and cat.catName != catFiltered:
-                allCats.append( cat.catName )
+        for cat in item.categs.all():
+            if cat.name not in allCats and cat.name != catFiltered:
+                allCats.append( cat.name )
     # Make the additional filtering
     filter = addFilter
     if filter:
         filter = [ f.strip() for f in filter.split(',') ] # convert the string into a list
-        myItems = myItems.filter( itemCats__catName__in = filter ).order_by('itemCode')
+        myItems = myItems.filter( categs__name__in = filter ).order_by('code')
     # Complete the context dictionary
     context['items'] = myItems
-    context['cats'] = allCats
+    context['categs'] = allCats
     context['addFilter'] = addFilter
     context['cart'] = getCart(request.session)
     return render( request, "ShowItems.html", context )

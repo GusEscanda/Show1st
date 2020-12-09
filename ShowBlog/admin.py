@@ -13,13 +13,10 @@ class PostTagAdmin(admin.ModelAdmin):
     readonly_fields=('created','updated')
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ("postDate", "postTitle", "tags")
-    list_filter = ('postDate', 'postTags__tagName')
+    list_display = ("date", "title")
+    list_filter = ('date', 'tags__name')
     readonly_fields = ('created','updated')
-    ordering = ['-postDate']
-
-    def tags(self, obj):
-        return obj.strTags()
+    ordering = ['-date']
 
 admin.site.register(PostTag, PostTagAdmin)
 admin.site.register(Post, PostAdmin)

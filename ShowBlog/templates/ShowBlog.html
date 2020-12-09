@@ -8,7 +8,7 @@
 <section>
     <div class="myCenteredFlex">
         <p class="text-center myBGColor myTextColor mySelected">
-            {{page.pageFilter.tagName}}
+            {{page.pageFilter.name}}
         </p>
         <p class="text-center myBGColor myTextColor">
             <a class="myLink {% if not addFilter %}mySelected{% endif %}" 
@@ -31,21 +31,21 @@
     <div class="container">
         <div class="row myRow">
             <div class="col-sm-4">
-                {% if post.postImage %}
-                    <img class="imageBlock" src="{{post.postImage.url}}" alt="{{post.postTitle}}">
+                {% if post.image %}
+                    <img class="imageBlock" src="{{post.image.url}}" alt="{{post.title}}">
                 {% else %}
-                    <img class="imageBlock" src="/media{% url page.BLOG %}default.png" alt="{{post.postTitle}}">
+                    <img class="imageBlock" src="/media{% url page.BLOG %}default.png" alt="{{post.title}}">
                 {% endif %}
             </div>
             <div class="col-sm infoBlock">
-                <h4> {{post.postTitle}} </h4>
-                <p> {{ post.postContent | linebreaks }} </p>
+                <h4> {{post.title}} </h4>
+                <p> {{ post.content | linebreaks }} </p>
                 <div>
-                    Author: {{post.postAuthor}}<br>
-                    Date: {{post.postDate}}<br>
-                    Tags:   {% for tag in post.postTags.all %}
-                                {% if tag.tagName != page.pageFilter.tagName %}
-                                    {{tag.tagName}} &nbsp;
+                    Author: {{post.author}}<br>
+                    Date: {{post.date}}<br>
+                    Tags:   {% for tag in post.tags.all %}
+                                {% if tag.name != page.pageFilter.name %}
+                                    {{tag.name}} &nbsp;
                                 {% endif %}
                             {% endfor %}
                 </div>

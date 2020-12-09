@@ -12,7 +12,7 @@ from ShowContact.models import ContactPage
 # Create your models here.
 
 class ItemCategory(models.Model):
-    catName  = models.CharField(max_length=30, unique=True, verbose_name='Category')
+    name     = models.CharField(max_length=30, unique=True, verbose_name='Category')
     created  = models.DateTimeField(auto_now_add=True)
     updated  = models.DateTimeField(auto_now=True)
     
@@ -21,7 +21,7 @@ class ItemCategory(models.Model):
         verbose_name_plural='Item Categories'
     
     def __str__(self):
-        return self.catName
+        return self.name
 
 
 class ItemsPage( Page ):
@@ -31,7 +31,8 @@ class ItemsPage( Page ):
         on_delete = models.CASCADE, 
         null=True, 
         blank=True, 
-        verbose_name='Filter Category'
+        verbose_name='Filter Category',
+        related_name='pages'
     )
     headerText = tmceModels.HTMLField( blank=True, null=True, verbose_name='Previous text' )
     footText = tmceModels.HTMLField( blank=True, null=True, verbose_name='Posterior text')
@@ -41,7 +42,8 @@ class ItemsPage( Page ):
         on_delete = models.SET_NULL,
         null=True,
         blank=True,
-        verbose_name='Send Cart Page' 
+        verbose_name='Send Cart Page',
+        related_name='itemPages'
     )
 
     def __init__(self, *args, **kwargs):
@@ -51,14 +53,14 @@ class ItemsPage( Page ):
 
 
 class Item(models.Model):
-    itemCode     = models.CharField(max_length=20, db_index=True, verbose_name='Code')
-    itemName     = models.CharField(max_length=60, verbose_name='Name')
-    itemDescrip  = models.TextField(blank=True, verbose_name='Description')
-    itemThumb    = models.ImageField(upload_to='ShowItems', verbose_name='Small (small)')
-    itemImage    = models.ImageField(upload_to='ShowItems', null=True, blank=True, verbose_name='Image (big)')
-    itemCats     = models.ManyToManyField(ItemCategory, verbose_name='Categories')
-    created      = models.DateTimeField(auto_now_add=True)
-    updated      = models.DateTimeField(auto_now=True)
+    code     = models.CharField(max_length=20, db_index=True, verbose_name='Code')
+    name     = models.CharField(max_length=60, verbose_name='Name')
+    descrip  = models.TextField(blank=True, verbose_name='Description')
+    thumb    = models.ImageField(upload_to='ShowItems', verbose_name='Small (small)')
+    image    = models.ImageField(upload_to='ShowItems', null=True, blank=True, verbose_name='Image (big)')
+    categs   = models.ManyToManyField(ItemCategory, verbose_name='Categories', related_name='items')
+    created  = models.DateTimeField(auto_now_add=True)
+    updated  = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name='Item'
@@ -66,13 +68,13 @@ class Item(models.Model):
     
     def strCats(self):
         s = ''
-        for cat in self.itemCats.all():
-            s += (', ' if s else '') + cat.catName
+        for cat in self.categs.all():
+            s += (', ' if s else '') + cat.name
         return s
 
 
     def __str__(self):
-        return str(self.itemCode) + ' ' + self.itemName + '  (' + self.strCats() + ')'
+        return str(self.code) + ' ' + self.name + '  (' + self.strCats() + ')'
 
 
 class ShoppingCart( models.Model ):

@@ -7,7 +7,7 @@ from mainApp.models import Page
 # Create your models here.
 
 class PostTag(models.Model):
-    tagName  = models.CharField(max_length=30, unique=True, verbose_name='Tag')
+    name     = models.CharField(max_length=30, unique=True, verbose_name='Tag')
     created  = models.DateTimeField(auto_now_add=True)
     updated  = models.DateTimeField(auto_now=True)
     
@@ -16,7 +16,7 @@ class PostTag(models.Model):
         verbose_name_plural='Post Tags'
     
     def __str__(self):
-        return self.tagName
+        return self.name
 
 
 class BlogPage( Page ):
@@ -25,7 +25,8 @@ class BlogPage( Page ):
                                     on_delete=models.CASCADE, 
                                     null=True, 
                                     blank=True, 
-                                    verbose_name='Filter Tag'
+                                    verbose_name='Filter Tag',
+                                    related_name='pages'
                                    )
 
     def __init__(self, *args, **kwargs):
@@ -35,14 +36,14 @@ class BlogPage( Page ):
 
 
 class Post(models.Model):
-    postDate     = models.DateField(default=datetime.date.today, db_index=True, verbose_name='Date')
-    postTitle    = models.CharField(max_length=60, verbose_name='Title')
-    postContent  = models.TextField(verbose_name='Content')
-    postImage    = models.ImageField(upload_to='ShowBlog', null=True, blank=True, verbose_name='Image')
-    postAuthor   = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name='Author')
-    postTags     = models.ManyToManyField(PostTag, verbose_name='Tags')
-    created      = models.DateTimeField(auto_now_add=True)
-    updated      = models.DateTimeField(auto_now=True)
+    date     = models.DateField(default=datetime.date.today, db_index=True, verbose_name='Date')
+    title    = models.CharField(max_length=60, verbose_name='Title')
+    content  = models.TextField(verbose_name='Content')
+    image    = models.ImageField(upload_to='ShowBlog', null=True, blank=True, verbose_name='Image')
+    author   = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name='Author', related_name='posts')
+    tags     = models.ManyToManyField(PostTag, verbose_name='Tags', related_name='posts')
+    created  = models.DateTimeField(auto_now_add=True)
+    updated  = models.DateTimeField(auto_now=True)
     
     class Meta:
         verbose_name='Post'
@@ -50,17 +51,12 @@ class Post(models.Model):
     
     def strTags(self):
         s = ''
-        for tag in self.postTags.all():
-            s += (', ' if s else '') + tag.tagName
+        for tag in self.tags.all():
+            s += (', ' if s else '') + tag.name
         return s
 
 
     def __str__(self):
-        return str(self.postDate) + ' ' + self.postTitle + '  (' + self.strTags() + ')'
-
-
-
-
-
+        return str(self.date) + ' ' + self.title + '  (' + self.strTags() + ')'
 
 

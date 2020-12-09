@@ -10,9 +10,9 @@ class HomePageAdmin(admin.ModelAdmin):
     ordering = ['position']
 
 class StyleAdmin(admin.ModelAdmin):
-    list_display=("styleName",)
+    list_display=("name",)
     readonly_fields=('created','updated')
-    ordering = ['styleName']
+    ordering = ['name']
 
 admin.site.register(SiteSettings)
 admin.site.register(Style, StyleAdmin)

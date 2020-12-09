@@ -34,8 +34,8 @@ def showContact(request, pageId, returnPageApp='', returnPageId=0):
     cartData = []
     for item in cart.items.all():
         cartData.append( {
-            'code': item.itemCode,
-            'name': item.itemName,
+            'code': item.code,
+            'name': item.name,
             'quantity': 0
         } )
     # if this is a POST request we need to process the form data

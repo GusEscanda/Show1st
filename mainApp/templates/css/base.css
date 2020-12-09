@@ -2,20 +2,20 @@
 
 :root {
 
-      {% if style.styleBGColor %}
-            --styleBGColor: {{style.styleBGColor}};
+      {% if style.bgColor %}
+            --bgColor: {{style.bgColor}};
       {% endif %}
 
-      {% if style.styleTextBGColor %}
-            --styleTextBGColor: {{style.styleTextBGColor}};
+      {% if style.textBGColor %}
+            --textBGColor: {{style.textBGColor}};
       {% endif %}
 
-      {% if style.styleTextColor %}
-            --styleTextColor: {{style.styleTextColor}};
+      {% if style.textColor %}
+            --textColor: {{style.textColor}};
       {% endif %}
 
-      {% if style.styleInfoBoxColor %}
-            --styleInfoBoxColor: {{style.styleInfoBoxColor}};
+      {% if style.infoBoxColor %}
+            --infoBoxColor: {{style.infoBoxColor}};
       {% endif %}
 
 }
@@ -23,12 +23,12 @@
 /* My styles */
 
 body {
-      background: url("{% if style.styleBGImage %}{{style.styleBGImage.url}}{% endif %}");
-      background-color: var(--styleBGColor,black) ;
+      background: url("{% if style.bgImage %}{{style.bgImage.url}}{% endif %}");
+      background-color: var(--bgColor,black) ;
       background-attachment: fixed;
       background-position: center;
       background-size: cover;
-      color: var(--styleTextColor,white);
+      color: var(--textColor,white);
     }
 
 .cursorPointer {
@@ -37,23 +37,23 @@ body {
 }
 
 .myBGColor {
-      background-color: var(--styleTextBGColor,darkblue);
+      background-color: var(--textBGColor,darkblue);
 }
 
 .myTextColor {
-      color: var(--styleTextColor,white);
+      color: var(--textColor,white);
 }
 
 .myLink {
       text-decoration: underline;
-      color: var(--styleTextColor,white);
-      background-color: var(--styleTextBGColor,darkblue);
+      color: var(--textColor,white);
+      background-color: var(--textBGColor,darkblue);
 }
 
 .myLink:hover {
       text-decoration: none;
-      color: var(--styleTextColor,white);
-      background-color: var(--styleTextBGColor,darkblue);
+      color: var(--textColor,white);
+      background-color: var(--textBGColor,darkblue);
 }
 
 .mySelected {
@@ -82,14 +82,14 @@ body {
 }
 
 .infoBlock {
-      background: var(--styleInfoBoxColor,darkblue);
+      background: var(--infoBoxColor,darkblue);
       border-radius: 25px;
       margin: 5px 5px;
       padding: 15px 15px;
 }
 
 .socialMedialList {
-      background-color: var(--styleTextBGColor,darkblue);
+      background-color: var(--textBGColor,darkblue);
 }
 
 .errorMessage {

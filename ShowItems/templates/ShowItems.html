@@ -8,12 +8,12 @@
 <section>
     <div class="myCenteredFlex">
         <p class="text-center myBGColor myTextColor mySelected">
-            {{page.pageFilter.catName}}
+            {{page.pageFilter.name}}
         </p>
         <p class="text-center myBGColor myTextColor">
             <a class="myLink {% if not addFilter %}mySelected{% endif %}" 
                href="{% url page.ITEMS %}{{page.id}}">All</a>
-            {% for cat in cats %}
+            {% for cat in categs %}
                 &nbsp;|&nbsp; 
                 <a class="myLink {% if cat == addFilter %}mySelected{% endif %}" 
                    href="{% url page.ITEMS %}addFilter/{{page.id}}/{{cat}}">  {{ cat }} </a>
@@ -48,24 +48,24 @@
             {% for item in items %}
                 <div class="col-md-3 infoBlock">
 
-                    {% if item.itemImage %}
-                        <img class="imageBlock" src="{{item.itemThumb.url}}" alt="{{item.itemName}}">
+                    {% if item.image %}
+                        <img class="imageBlock" src="{{item.thumb.url}}" alt="{{item.name}}">
                     {% endif %}
 
                     <div> 
-                        {{item.itemName}}
-                        <div id="itemName-{{item.id}}">
+                        {{item.name}}
+                        <div id="name-{{item.id}}">
                             <div    class="cursorPointer" 
-                                    onclick="swapDisplay('itemName-{{item.id}}','itemDescrip-{{item.id}}');"
+                                    onclick="swapDisplay('name-{{item.id}}','descrip-{{item.id}}');"
                             >
                                 ( ... )
                             </div>
                         </div>
                     </div>
-                    <div id="itemDescrip-{{item.id}}" style="display:none" >
-                        {{ item.itemDescrip | linebreaks }}
+                    <div id="descrip-{{item.id}}" style="display:none" >
+                        {{ item.descrip | linebreaks }}
                         <div    class="cursorPointer" 
-                                onclick="swapDisplay('itemName-{{item.id}}','itemDescrip-{{item.id}}');"
+                                onclick="swapDisplay('name-{{item.id}}','descrip-{{item.id}}');"
                         >
                             ( - )
                         </div>
@@ -93,14 +93,14 @@
 
                     <div class="d-flex justify-content-between">
                         <div>
-                            {% for cat in item.itemCats.all %}
-                                {% if cat.catName != page.pageFilter.catName %}
-                                    {{cat.catName}} &nbsp;
+                            {% for cat in item.categs.all %}
+                                {% if cat.name != page.pageFilter.name %}
+                                    {{cat.name}} &nbsp;
                                 {% endif %}
                             {% endfor %}
                         </div>
                         <div>
-                            {{item.itemCode}}
+                            {{item.code}}
                         </div>
                     </div>
 

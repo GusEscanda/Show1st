@@ -37,21 +37,21 @@ class SiteSettings( SingletonModel ):
 
 
 class Style(models.Model):
-    styleName         = models.SlugField(max_length=20, blank=False, unique=True, verbose_name='Style Name')
-    styleBGColor      = models.CharField(max_length=120, blank=True, verbose_name='Background color')
-    styleBGImage      = models.ImageField(upload_to='mainApp', null=True, blank=True, verbose_name='Background Image')
-    styleTextColor    = models.CharField(max_length=120, blank=True, verbose_name='Text color')
-    styleTextBGColor  = models.CharField(max_length=120, blank=True, verbose_name='Text BG color')
-    styleInfoBoxColor = models.CharField(max_length=120, blank=True, verbose_name='Info box color')
-    created           = models.DateTimeField(auto_now_add=True)
-    updated           = models.DateTimeField(auto_now=True)
-    
+    name         = models.SlugField(max_length=20, blank=False, unique=True, verbose_name='Style Name')
+    bgColor      = models.CharField(max_length=120, blank=True, verbose_name='Background color')
+    bgImage      = models.ImageField(upload_to='mainApp', null=True, blank=True, verbose_name='Background Image')
+    textColor    = models.CharField(max_length=120, blank=True, verbose_name='Text color')
+    textBGColor  = models.CharField(max_length=120, blank=True, verbose_name='Text BG color')
+    infoBoxColor = models.CharField(max_length=120, blank=True, verbose_name='Info box color')
+    created      = models.DateTimeField(auto_now_add=True)
+    updated      = models.DateTimeField(auto_now=True)
+
     class Meta:
         verbose_name='style'
         verbose_name_plural='styles'
     
     def __str__(self):
-        return self.styleName
+        return self.name
 
 
 class Page(models.Model):
@@ -87,7 +87,7 @@ class Page(models.Model):
     name          = models.CharField(max_length=30, blank=False, verbose_name='Name')
     mainTitle     = models.CharField(max_length=60, blank=False, verbose_name='Main title')
     imageTitle    = models.ImageField(upload_to='mainApp', null=True, blank=True, verbose_name='Image title')
-    style         = models.ForeignKey(Style, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Style')
+    style         = models.ForeignKey(Style, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Style', related_name='pages')
     created       = models.DateTimeField(auto_now_add=True)
     updated       = models.DateTimeField(auto_now=True)
     

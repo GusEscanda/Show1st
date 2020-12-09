@@ -20,7 +20,7 @@ def homePage(request, pageId = ''):
 def cssRenderer(request, sName, filename):
     dictionary = {}
     if sName:
-        dictionary['style'] = Style.objects.get( styleName = sName )
+        dictionary['style'] = Style.objects.get( name = sName )
     return render(request, 'css/' + filename + '.css', dictionary, content_type="text/css")
 
 
