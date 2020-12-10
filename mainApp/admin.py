@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django import forms
 
 from .models import Style, HomePage, SiteSettings
 
@@ -14,7 +15,18 @@ class StyleAdmin(admin.ModelAdmin):
     readonly_fields=('created','updated')
     ordering = ['name']
 
-admin.site.register(SiteSettings)
+class SiteSettingsAdminForm(forms.ModelForm):
+  class Meta:
+    model = SiteSettings
+    widgets = {
+      'emailHostPassword': forms.PasswordInput(),
+    }
+    fields = '__all__'
+
+class SiteSettingsAdmin(admin.ModelAdmin):
+  form = SiteSettingsAdminForm
+
+admin.site.register(SiteSettings, SiteSettingsAdmin)
 admin.site.register(Style, StyleAdmin)
 admin.site.register(HomePage, HomePageAdmin)
 

@@ -24,7 +24,7 @@ class SiteSettings( SingletonModel ):
     emailHostUser      = models.CharField(max_length = 100, default = '', blank = True, verbose_name='Email Host User')
     emailHostPassword  = models.CharField(max_length = 50, default = '', blank = True, verbose_name='Email Host Password')
     emailPort          = models.PositiveIntegerField(default = 587, blank = True, verbose_name='Email Port')
-    emailUseTLS        = models.BooleanField(default=False, verbose_name='Email Use TLS')
+    emailUseTLS        = models.BooleanField(default=True, verbose_name='Email Use TLS')
     emailUseSSL        = models.BooleanField(default=False, verbose_name='Email Use SSL')
 
     class Meta:
