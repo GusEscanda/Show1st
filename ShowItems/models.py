@@ -26,7 +26,7 @@ class ItemCategory(models.Model):
 
 class ItemsPage( Page ):
 
-    pageFilter = models.ForeignKey(
+    pageCatFilter = models.ForeignKey(
         ItemCategory, 
         on_delete = models.CASCADE, 
         null=True, 

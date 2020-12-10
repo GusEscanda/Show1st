@@ -12,13 +12,13 @@ from django.utils import timezone
 
 # Create your views here.
 
-def showItems(request, pageId, addFilter=''):
+def showItems(request, pageId, addCatFilter=''):
     context = getContextDict( Page, ItemsPage, pageId )
-    # Obtain the items, optionally filtered by pageFilter
-    pageFilter = context['page'].pageFilter
-    if pageFilter:
-        myItems     = pageFilter.items.all().order_by('code')
-        catFiltered = pageFilter.name
+    # Obtain the items, optionally filtered by pageCatFilter
+    pageCatFilter = context['page'].pageCatFilter
+    if pageCatFilter:
+        myItems     = pageCatFilter.items.all().order_by('code')
+        catFiltered = pageCatFilter.name
     else:
         myItems     = Item.objects.all().order_by('code')
         catFiltered = ''
@@ -29,14 +29,14 @@ def showItems(request, pageId, addFilter=''):
             if cat.name not in allCats and cat.name != catFiltered:
                 allCats.append( cat.name )
     # Make the additional filtering
-    filter = addFilter
+    filter = addCatFilter
     if filter:
         filter = [ f.strip() for f in filter.split(',') ] # convert the string into a list
         myItems = myItems.filter( categs__name__in = filter ).order_by('code')
     # Complete the context dictionary
     context['items'] = myItems
     context['categs'] = allCats
-    context['addFilter'] = addFilter
+    context['addCatFilter'] = addCatFilter
     context['cart'] = getCart(request.session)
     return render( request, "ShowItems.html", context )
 

@@ -21,13 +21,37 @@ class PostTag(models.Model):
 
 class BlogPage( Page ):
 
-    pageFilter = models.ForeignKey( PostTag, 
-                                    on_delete=models.CASCADE, 
-                                    null=True, 
-                                    blank=True, 
-                                    verbose_name='Filter Tag',
-                                    related_name='pages'
-                                   )
+    DF_ALL       = 0
+    DF_TODAY     = 1
+    DF_WEEK      = 7
+    DF_MONTH     = 30
+    DF_TRIMESTER = 90
+    DF_YEAR      = 365
+    
+    DATE_FILTER_CHOICES = [
+        (DF_ALL,       'All'),
+        (DF_TODAY,     'Today'),
+        (DF_WEEK,      'last 7 days'),
+        (DF_MONTH,     'last 30 days'),
+        (DF_TRIMESTER, 'last 90 days'),
+        (DF_YEAR,      'last 365 days'),
+    ]
+
+    pageTagFilter = models.ForeignKey(
+        PostTag, 
+        on_delete=models.CASCADE, 
+        null=True, 
+        blank=True, 
+        verbose_name='Filter Tag',
+        related_name='pages'
+    )
+    pageDateFilter = models.PositiveIntegerField(
+        choices = DATE_FILTER_CHOICES,
+        default = DF_ALL, 
+        null = False, 
+        verbose_name = 'Filter Date', 
+        help_text = 'Filter entries older than x days. 0 means no filtering'
+    )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

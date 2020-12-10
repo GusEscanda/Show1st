@@ -9,11 +9,11 @@ from .models import InfoPage
 
 def showInfo(request, pageId, subPageId=0):
     if subPageId:
-        contextDict = getContextDict( Page, InfoPage, subPageId )
-        contextDict['pageId'] = pageId
+        context = getContextDict( Page, InfoPage, subPageId )
+        context['pageId'] = pageId
     else:
-        contextDict = getContextDict( Page, InfoPage, pageId )
-    return render( request, "ShowInfo.html", contextDict )
+        context = getContextDict( Page, InfoPage, pageId )
+    return render( request, "ShowInfo.html", context )
 
 
 

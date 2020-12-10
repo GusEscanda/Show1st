@@ -8,15 +8,15 @@
 <section>
     <div class="myCenteredFlex">
         <p class="text-center myBGColor myTextColor mySelected">
-            {{page.pageFilter.name}}
+            {{page.pageCatFilter.name}}
         </p>
         <p class="text-center myBGColor myTextColor">
-            <a class="myLink {% if not addFilter %}mySelected{% endif %}" 
+            <a class="myLink {% if not addCatFilter %}mySelected{% endif %}" 
                href="{% url page.ITEMS %}{{page.id}}">All</a>
             {% for cat in categs %}
                 &nbsp;|&nbsp; 
-                <a class="myLink {% if cat == addFilter %}mySelected{% endif %}" 
-                   href="{% url page.ITEMS %}addFilter/{{page.id}}/{{cat}}">  {{ cat }} </a>
+                <a class="myLink {% if cat == addCatFilter %}mySelected{% endif %}" 
+                   href="{% url page.ITEMS %}addCatFilter/{{page.id}}/{{cat}}">  {{ cat }} </a>
             {% endfor %}
         </p>
     </div>
@@ -94,7 +94,7 @@
                     <div class="d-flex justify-content-between">
                         <div>
                             {% for cat in item.categs.all %}
-                                {% if cat.name != page.pageFilter.name %}
+                                {% if cat.name != page.pageCatFilter.name %}
                                     {{cat.name}} &nbsp;
                                 {% endif %}
                             {% endfor %}
