@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
+from django.utils.translation import gettext_lazy as _
 from django.core import mail
 from django import forms
 
@@ -49,7 +50,7 @@ def showContact(request, pageId, returnPageApp='', returnPageId=0):
         if formValid and formsetValid:
             # process the data in form.cleaned_data as required
             if not settings.emailConfigured():
-                return HttpResponse('Error: the email Host is not configured...')
+                return HttpResponse(_('Error: the email Host is not configured...'))
             cd = form.cleaned_data
             email = mail.EmailMessage()
             email.subject    = cd['subject'].subject

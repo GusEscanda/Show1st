@@ -50,7 +50,7 @@
             </div>
             <div class="col-sm infoBlock">
                 <h4> {{post.title}} </h4>
-                <p> {{ post.content | linebreaks }} </p>
+                <p> {{ post.content | safe }} </p>
                 <div>
                     Author: {{post.author}}<br>
                     Date: {{post.date}}<br>
