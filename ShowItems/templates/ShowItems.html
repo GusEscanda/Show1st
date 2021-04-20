@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load i18n %}
 
 {% block content %}
 
@@ -12,11 +13,11 @@
         </p>
         <p class="text-center myBGColor myTextColor">
             <a class="myLink {% if not addCatFilter %}mySelected{% endif %}" 
-               href="{% url page.ITEMS %}{{page.id}}">All</a>
+               href="{% url page.ITEMS %}{{page.id}}">{% translate "All" %}</a>
             {% for cat in categs %}
-                &nbsp;|&nbsp; 
+                &nbsp;|&nbsp;
                 <a class="myLink {% if cat == addCatFilter %}mySelected{% endif %}" 
-                   href="{% url page.ITEMS %}addCatFilter/{{page.id}}/{{cat}}">  {{ cat }} </a>
+                   href="{% url page.ITEMS %}addCatFilter/{{page.id}}/{{cat}}"> {{ cat }} </a>
             {% endfor %}
         </p>
     </div>
@@ -34,7 +35,7 @@
 {% if page.enableShopCart and page.sendCartPage %}
     <div class="cursorPointer">
         <a href="{% url page.sendCartPage.app %}{{page.sendCartPage.id}}{% url page.app %}{{page.id}}">
-            <img src="{% static 'mainApp/img/ShopCartConfirm.png' %}" width="30" height="30" alt="Send shopping cart">
+            <img src="{% static 'mainApp/img/ShopCartConfirm.png' %}" width="30" height="30" alt="{% translate 'Send shopping cart' %}">
         </a>
         ( <span id="itemsQty">{{ cart.itemsQty }}</span> )
         {% include "resetCart.html" %}

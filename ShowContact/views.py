@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from django.core import mail
 from django import forms
 
-from mainApp.models import Page, SiteSettings
+from mainApp.models import Page
 from mainApp.views import getContextDict
 
 from ShowItems.models import ShoppingCart, getCart
@@ -27,8 +27,6 @@ def createCSV(data, fieldnames):
 
 def showContact(request, pageId, returnPageApp='', returnPageId=0):
     context = getContextDict( Page, ContactPage, pageId )
-    settings = SiteSettings.load()
-    context['settings'] = settings
     context['smedia'] = SocialMedia.objects.all().order_by('order')
     ItemsCartFormSet = forms.formset_factory( ItemsCartForm, extra = 0 )
     cart = getCart(request.session)
@@ -49,7 +47,7 @@ def showContact(request, pageId, returnPageApp='', returnPageId=0):
         formsetValid = formset.is_valid() # the 'and' makes the 2nd one not evaluate if the 1st fails
         if formValid and formsetValid:
             # process the data in form.cleaned_data as required
-            if not settings.emailConfigured():
+            if not context['siteSettings'].emailConfigured():
                 return HttpResponse(_('Error: the email Host is not configured...'))
             cd = form.cleaned_data
             email = mail.EmailMessage()
@@ -67,12 +65,12 @@ def showContact(request, pageId, returnPageApp='', returnPageId=0):
                     cart.reset()
             with mail.get_connection(
                 fail_silently = False,             # TODO: after the debugging process make fail_silently=True
-                host          = settings.emailHost, 
-                port          = settings.emailPort, 
-                username      = settings.emailHostUser, 
-                password      = settings.emailHostPassword, 
-                use_tls       = settings.emailUseTLS, 
-                use_ssl       = settings.emailUseSSL
+                host          = context['siteSettings'].emailHost, 
+                port          = context['siteSettings'].emailPort, 
+                username      = context['siteSettings'].emailHostUser, 
+                password      = context['siteSettings'].emailHostPassword, 
+                use_tls       = context['siteSettings'].emailUseTLS, 
+                use_ssl       = context['siteSettings'].emailUseSSL
             ) as connection:
                 email.connection = connection
                 email.send()

@@ -33,6 +33,9 @@
     </head>
 
     <body>
+        {% load i18n %}
+<!--        {% language siteSettings.siteLanguage %}     -->
+
         {% if page.imageTitle %}
             <h1 style="display: none"> {{page.mainTitle}} </h1>   <!-- Nico says that there must be one and only one h1 tag -->
             <p style="text-align:center"> <img src="{{page.imageTitle.url}}" alt="{{page.mainTitle}}"> </p>
@@ -49,6 +52,8 @@
         {% endblock %}
       
         {% include "footer.html" %}
+        
+<!--        {% endlanguage %}    -->
         
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->

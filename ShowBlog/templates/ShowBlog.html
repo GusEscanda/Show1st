@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load i18n %}
 
 {% block content %}
 
@@ -13,7 +14,7 @@
         </p>
         <p class="text-center myBGColor myTextColor">
             <a class="myLink {% if not addTagFilter %}mySelected{% endif %}" 
-               href="{% url page.BLOG %}addFilter/{{page.id}}//{{addDateFilter}}">All</a>
+               href="{% url page.BLOG %}addFilter/{{page.id}}//{{addDateFilter}}">{% translate "All" %}</a>
             {% for tag in tags %}
                 &nbsp;|&nbsp; 
                 <a class="myLink {% if tag == addTagFilter %}mySelected{% endif %}" 
@@ -52,13 +53,14 @@
                 <h4> {{post.title}} </h4>
                 <p> {{ post.content | safe }} </p>
                 <div>
-                    Author: {{post.author}}<br>
-                    Date: {{post.date}}<br>
-                    Tags:   {% for tag in post.tags.all %}
-                                {% if tag.name != page.pageTagFilter.name %}
-                                    {{tag.name}} &nbsp;
-                                {% endif %}
-                            {% endfor %}
+                    {% translate "Author" %}: {{post.author}}<br>
+                    {% translate "Date" %}: {{post.date}}<br>
+                    {% translate "Tags" %}:
+                        {% for tag in post.tags.all %}
+                            {% if tag.name != page.pageTagFilter.name %}
+                                {{tag.name}} &nbsp;
+                            {% endif %}
+                        {% endfor %}
                 </div>
             </div>
         </div>

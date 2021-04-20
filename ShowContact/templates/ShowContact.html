@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load i18n %}
 
 {% block content %}
 
@@ -49,7 +50,7 @@
                 </div>
             {% endfor %}
         {% endif %}
-        <input type="submit" value="Send">
+        <input type="submit" value="{% translate 'Send' %}">
     </form>
 
 {% endif %}

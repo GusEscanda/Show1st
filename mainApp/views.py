@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .models import Page, Style, HomePage
+from .models import Page, Style, HomePage, SiteSettings
 
 # Create your views here.
 
@@ -10,7 +10,7 @@ def getContextDict(pages, appPages, pageId):
     if not pageId:
         pageId = menuOptions[0].id
     page = appPages.objects.get( id = pageId )
-    return { 'menuOptions': menuOptions, 'pageId': pageId, 'page': page }
+    return { 'siteSettings': SiteSettings.load(), 'menuOptions': menuOptions, 'pageId': pageId, 'page': page }
 
 
 def homePage(request, pageId = ''):
